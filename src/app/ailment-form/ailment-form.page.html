@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Ailment Form</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Ailment Form</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-slides pager="true" [options]="slideOpts" #slides>
+        <ion-slide style="display:block;padding:250px;">
+
+            <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input [(ngModel)]="name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Date Of Birth</ion-label>
+                <ion-datetime displayFormat="MM DD YYYY" placeholder="Select Date" [(ngModel)]="dob"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Next of Kin</ion-label>
+                <ion-input [(ngModel)]="nok"></ion-input>
+            </ion-item>
+            <ion-button color="primary" (click)="nextSlide(slides)">Next</ion-button>
+        </ion-slide>
+        <ion-slide style="display:block;padding:250px;">
+            <ion-item>
+                <ion-label position="floating">Address</ion-label>
+                <ion-input [(ngModel)]="address"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">CHI Number</ion-label>
+                <ion-input [(ngModel)]="chinumber"></ion-input>
+            </ion-item>
+            <ion-button color="primary" (click)="nextSlide(slides)">Next</ion-button>
+        </ion-slide>
+        <ion-slide style="display:block;padding:250px;">
+            <ion-item>
+                <ion-label position="floating">Ailment / Illness</ion-label>
+                <ion-input [(ngModel)]="illness"></ion-input>
+            </ion-item>
+            <ion-button color="primary" (click)="nextSlide(slides)">Next</ion-button>
+        </ion-slide>
+        <ion-slide style="display:block;padding:250px;">
+
+            <img src="../assets/scale.png" style="width:600px;height:600px;" />
+
+            <ion-range dualKnobs="false" min="0" max="10" step="1" snaps="true" id="painScale" [(ngModel)]="knobValues">
+                <ion-label slot="start">0 (no pain) </ion-label>
+
+                <ion-label slot="end">10 (worst pain possible) </ion-label>
+            </ion-range>
+            <ion-label position="center">{{knobValues}}</ion-label>
+            <ion-button color="primary" (click)="gatherInfo()" style="margin-top:5%;">Next</ion-button>
+        </ion-slide>
+
+    </ion-slides>
+</ion-content>
