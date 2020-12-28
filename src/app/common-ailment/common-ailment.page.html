@@ -14,8 +14,9 @@
         </ion-toolbar>
     </ion-header>
 
-    <div id="container">
-        <strong class="capitalize">Common Ailments</strong>
-        <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-    </div>
+
+    <div style="position: relative;height:100%"><iframe src="https://api-bridge.azurewebsites.net/conditions/?p=all&aspect=name,overview_short,symptoms_short,symptoms_long,treatments_overview_short,other_treatments_long,self_care_long,prevention_short,causes_short&tab=0&uid=2c5447a0-4934-11eb-87c5-9993bada0fee"
+            title="NHS website - health a-z" style="position: absolute; height: 100%; width: 100%; border: 2px solid #015eb8;"></iframe></div>
+
+
 </ion-content>
