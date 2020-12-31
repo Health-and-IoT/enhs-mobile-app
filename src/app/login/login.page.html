@@ -14,8 +14,19 @@
         </ion-toolbar>
     </ion-header>
 
-    <div id="container">
-        <strong class="capitalize">Login</strong>
-        <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div id="container" style="display:block;padding:250px;">
+        <ion-item>
+            <ion-label>Username</ion-label>
+            <ion-input [(ngModel)]="username" placeholder="Username"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input [(ngModel)]="password" type="password" placeholder="****"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Site ID</ion-label>
+            <ion-input [(ngModel)]="siteid" placeholder="102"></ion-input>
+        </ion-item>
+        <ion-button color="primary" (click)="login()" style="margin-top:5%;">Login</ion-button>
     </div>
 </ion-content>
