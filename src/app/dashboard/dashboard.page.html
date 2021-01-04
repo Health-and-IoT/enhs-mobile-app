@@ -71,7 +71,42 @@
 
                 </ion-row>
             </ion-col>
+            <div *ngIf="checkStatus()">
+                <ion-toolbar>
+                    <ion-title size="large">Incoming Forms</ion-title>
+                </ion-toolbar>
+
+                <ngx-datatable [rows]="rows" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [columns]="columns" [reorderable]="reorderable">
+
+                    <ngx-datatable-column *ngFor="let column of columns; 
+                    let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Actions" sortable="false" prop="Id">
+                        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            <div style="display: inline-block">
+                                <ion-button style="float:left;" color="primary" (click)="onSelect(row)">
+                                    View
+                                </ion-button>
+                                <ion-button style="float:left;" color="danger" (click)="onSelect(row)">
+                                    High
+                                </ion-button>
+                                <ion-button style="float:left;" color="warning" (click)="onSelect(row)">
+                                    Medium
+                                </ion-button>
+                                <ion-button style="float:left;" color="success" (click)="onSelect(row)">
+                                    Low
+                                </ion-button>
+                            </div>
+
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+
         </ion-grid>
+
+
 
 
     </div>

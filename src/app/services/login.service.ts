@@ -2,12 +2,14 @@ import { getLocaleExtraDayPeriods } from '@angular/common';
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
+import { Storage } from '@ionic/storage';
 export interface User{
     username: string;
     password: string;
     siteid: number;
+    rank: string;
 }
 @Injectable({
     providedIn: 'root'
@@ -15,7 +17,8 @@ export interface User{
 export class LoginService{
     private testCollection: AngularFirestoreCollection<User>;
     private users: Observable<User[]>;
-    constructor(private db : AngularFirestore){
+    foundUser: User[];
+    constructor(private db : AngularFirestore, private storage: Storage){
         this.testCollection = db.collection<User>('users');
         this.users = this.testCollection.snapshotChanges().pipe(
             map(actions => {
@@ -33,10 +36,13 @@ export class LoginService{
         return this.users;
     }
     getUser(username: string, password: string, siteid: number) {
-        return this.db.collection('users', ref => ref.where('username', '==', username).where('password', '==', password).where('siteid', '==', siteid)).valueChanges().subscribe(val => console.log(val) );
+       return this.db.collection('users', ref => ref.where('username', '==', username).where('password', '==', password).where('siteid', '==', siteid)).snapshotChanges().
+        pipe(switchMap(docRef => {
+            this.storage.set('userID', docRef[0].payload.doc.id);
+            this.storage.set('loggedIn', true);
+            return this.db.collection('users').doc(docRef[0].payload.doc.id).valueChanges()
+        }))
        
-        
-        
         }
     
     updateUser(user:User, id:string){
@@ -44,6 +50,13 @@ export class LoginService{
     }
     addUser(user:User){
         return this.testCollection.add(user);
+    }
+    getUserById(id){
+       
+        return this.testCollection.doc<User>(id).valueChanges();
+    
+
+
     }
     removeUser(id){
         return this.testCollection.doc(id).delete(); 

@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Storage } from '@ionic/storage';
+import { LoginService, User } from './services/login.service';
+import { TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -54,15 +59,39 @@ export class AppComponent implements OnInit {
     }
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-
+private loggedIn : boolean;
+private user: User;
+username: String; 
+rank: String;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private storage: Storage,
+    private loginService: LoginService,
+    private router: Router
+    
   ) {
     this.initializeApp();
+    //storage.set('loggedIn', false);
+   
+    
   }
 
+  async getUser() {
+   var result = await this.storage.get('userID').then((val) => { return this.loginService.getUserById(val)})
+  return result;
+  }
+ 
+  showDetails(p){
+    
+  if(p.title == "Login" && this.loggedIn == true){
+    return false;
+  }else{
+    return true;
+  }
+  }
+ 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -70,10 +99,41 @@ export class AppComponent implements OnInit {
     });
   }
 
+  showProfile(){
+
+  }
+  checkStatus(){
+    if(this.loggedIn == true){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   ngOnInit() {
     const path = window.location.pathname.split('folder/')[1];
+    
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+      
     }
+    this.storage.get('loggedIn').then((val) => {
+      console.log('User logged in? : ', val);
+      if (val){
+        this.loggedIn = true;
+        this.storage.get('userID').then((val1) => { 
+          this.loginService.getUserById(val1).subscribe(res =>{
+            this.user = res;
+            this.username = res.username;
+            this.rank = res.rank;
+            this.router.navigate(['/dashboard'])
+          })
+        })
+        //console.log(this.username)
+
+      }else{
+        this.loggedIn = false;
+      }
+    });
   }
 }

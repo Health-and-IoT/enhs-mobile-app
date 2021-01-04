@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AilmentService, Form } from '../services/af.service';
 @Component({
   selector: 'app-ailment-form',
   templateUrl: './ailment-form.page.html',
@@ -13,24 +13,28 @@ nok: any;
 address: any;
 chinumber: any;
 illness: any;
+allergies: any;
 knobValues: any;
-
+forms: Form[];
  slideOpts = {
     initialSlide: 0,
     speed: 400
   };
-  constructor() { 
+  constructor(private ailmentService: AilmentService) { 
   
   }
 
   ngOnInit() {
+    this.ailmentService.getUsers().subscribe(res =>{
+      this.forms = res;
+    })
   }
   nextSlide(slides) {
     slides.slideNext();
   }
   
   gatherInfo() {
-    var info = {name: this.name, dob: this.dob, nok: this.nok, address: this.address, chinumber: this.chinumber, illness: this.illness, pain: this.knobValues}
-    console.log(info);
+    let form: Form = {name: this.name, dob: this.dob, nok: this.nok, address: this.address, chinumber: this.chinumber, illness: this.illness, allergies: this.allergies, pain: this.knobValues}
+    this.ailmentService.addUser(form);
   }
 }
