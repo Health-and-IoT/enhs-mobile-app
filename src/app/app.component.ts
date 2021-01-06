@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
@@ -69,7 +69,8 @@ rank: String;
     private statusBar: StatusBar,
     private storage: Storage,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
     
   ) {
     this.initializeApp();
@@ -91,6 +92,29 @@ rank: String;
     return true;
   }
   }
+
+  async logout(){
+    this.storage.set('loggedIn', false);
+    this.storage.set('userID', null);
+    const alert = await this.alertController.create({
+      header: 'Logged out!',
+      message: 'You have successfully logged out. Redirecting to dashboard page.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            location.reload();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+   
+  
+   
+
+  }
  
   initializeApp() {
     this.platform.ready().then(() => {
@@ -109,6 +133,8 @@ rank: String;
       return false;
     }
   }
+
+  
 
   ngOnInit() {
     const path = window.location.pathname.split('folder/')[1];

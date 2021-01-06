@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'viewform',
+    loadChildren: () => import('./viewform/viewform.module').then( m => m.ViewformPageModule)
   }
 ];
 

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
 import { Storage } from '@ionic/storage';
+import { User } from './login.service';
 export interface Form{
     name: string;
     dob: string;
@@ -14,6 +15,9 @@ export interface Form{
     illness: string;
     allergies: string;
     pain: string;
+    priority: string;
+    dateSubmitted: string;
+    seen: boolean; 
 }
 @Injectable({
     providedIn: 'root'
@@ -41,19 +45,15 @@ export class AilmentService{
     }
    
     
-    updateUser(form:Form, id:string){
-        return this.testCollection.doc(id).update(form);
+    updateUser(id:string, form:Form){
+        
+        this.testCollection.doc(id).update(form);
+        
     }
     addUser(form:Form){
         return this.testCollection.add(form);
     }
-    getUserById(id){
-       
-        return this.testCollection.doc<Form>(id).valueChanges();
-    
-
-
-    }
+   
     removeUser(id){
         return this.testCollection.doc(id).delete(); 
     }

@@ -20,7 +20,7 @@
         <ion-grid>
             <ion-col size="12">
                 <ion-row>
-                    <ion-card style="width:20%;float:left;" button="true" href="/ailment-form">
+                    <ion-card *ngIf="checkStatus2()" style="width:20%;float:left;" button="true" href="/ailment-form">
                         <img src="../assets/doctor.jpg" />
                         <ion-card-header>
 
@@ -40,7 +40,7 @@
                         </ion-card-header>
 
                         <ion-card-content>
-                            Feeling ill or needing to symptoms of an ailment? Check out the Common Ailments section showing over 800 known ailments, symptoms and methods of providing care to these ailments! Click here to access the Common Ailments section!
+                            Check out the Common Ailments section showing over 800 known ailments, symptoms and methods of providing care to these ailments! Click here to access the Common Ailments section!
 
                         </ion-card-content>
                     </ion-card>
@@ -76,25 +76,41 @@
                     <ion-title size="large">Incoming Forms</ion-title>
                 </ion-toolbar>
 
-                <ngx-datatable [rows]="rows" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [columns]="columns" [reorderable]="reorderable">
+                <ngx-datatable [rows]="rows" [rowClass]="getRowClass" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [columns]="columns" [reorderable]="reorderable">
 
                     <ngx-datatable-column *ngFor="let column of columns; 
                     let i = index;" name="{{column.name}}" prop="{{column.prop}}">
                     </ngx-datatable-column>
+                    <ngx-datatable-column name="Priority" sortable="false" prop="priority">
+                        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
 
+
+                            <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
+                                High
+                            </ion-button>
+                            <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
+                                Medium
+                            </ion-button>
+                            <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
+                                Low
+                            </ion-button>
+
+
+                        </ng-template>
+                    </ngx-datatable-column>
                     <ngx-datatable-column name="Actions" sortable="false" prop="Id">
                         <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                             <div style="display: inline-block">
-                                <ion-button style="float:left;" color="primary" (click)="onSelect(row)">
+                                <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
                                     View
                                 </ion-button>
-                                <ion-button style="float:left;" color="danger" (click)="onSelect(row)">
+                                <ion-button style="float:left;" color="danger" (click)="setPrior('high', row)">
                                     High
                                 </ion-button>
-                                <ion-button style="float:left;" color="warning" (click)="onSelect(row)">
+                                <ion-button style="float:left;" color="warning" (click)="setPrior('medium', row)">
                                     Medium
                                 </ion-button>
-                                <ion-button style="float:left;" color="success" (click)="onSelect(row)">
+                                <ion-button style="float:left;" color="success" (click)="setPrior('low', row)">
                                     Low
                                 </ion-button>
                             </div>
