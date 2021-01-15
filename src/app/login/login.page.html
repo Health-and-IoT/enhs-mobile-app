@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Login</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <div id="container" style="display:block;padding:250px;">
+        <ion-item>
+            <ion-label>Username</ion-label>
+            <ion-input [(ngModel)]="username" placeholder="Username"></ion-input>
+        </ion-item>
+        <ion-item>
+
+            <ion-label>Password</ion-label>
+            <ion-input [(ngModel)]="password" type="password" placeholder="****"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Site ID</ion-label>
+            <ion-input [(ngModel)]="siteid" placeholder="102"></ion-input>
+        </ion-item>
+        <ion-button color="primary" (click)="login()" style="margin-top:5%;">Login</ion-button>
+    </div>
+</ion-content>

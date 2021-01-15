@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Common Ailments</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Common Ailments</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+
+    <div style="position: relative;height:100%"><iframe src="https://api-bridge.azurewebsites.net/conditions/?p=all&aspect=name,overview_short,symptoms_short,symptoms_long,treatments_overview_short,other_treatments_long,self_care_long,prevention_short,causes_short&tab=0&uid=2c5447a0-4934-11eb-87c5-9993bada0fee"
+            title="NHS website - health a-z" style="position: absolute; height: 100%; width: 100%; border: 2px solid #015eb8;"></iframe></div>
+
+
+</ion-content>
