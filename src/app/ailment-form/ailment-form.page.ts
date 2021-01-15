@@ -69,6 +69,36 @@ forms: Form[];
     await alert.present();
   }
 
+  isItemAvailable = false;
+     items = [];
+
+     initializeItems(){
+         this.items = ["Abdominal aortic aneurism","Abcess", "Allergies", "Back pain", "Blisters", "Burn", "Dehydration", "Diabetes", "Cancer", "Neck pain", "Arm pain", "Stomach pain", "Leg pain", "Sore head", "Sore ears", "Sore nose", "Sore"];
+     }
+     test(item){
+       this.illness = item
+       console.log(item)
+     }
+
+     getItems(ev: any) {
+         // Reset items back to all of the items
+         this.initializeItems();
+
+         // set val to the value of the searchbar
+         const val = ev.target.value;
+
+         // if the value is an empty string don't filter the items
+         if (val && val.trim() !== '') {
+             this.isItemAvailable = true;
+             this.items = this.items.filter((item) => {
+                 return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+             })
+         } else {
+             this.isItemAvailable = false;
+         }
+     }
+
+
   getPrior() : string{
     this.priority = "low";
     this.seen = false;

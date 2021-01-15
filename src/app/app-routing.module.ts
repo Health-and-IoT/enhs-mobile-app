@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'viewform',
     loadChildren: () => import('./viewform/viewform.module').then( m => m.ViewformPageModule)
+  },
+  {
+    path: 'options',
+    loadChildren: () => import('./options/options.module').then( m => m.OptionsPageModule)
   }
 ];
 

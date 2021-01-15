@@ -53,6 +53,11 @@ export class AppComponent implements OnInit {
       icon: 'mail'
     },
     {
+      title: 'Options',
+      url: '/options',
+      icon: 'options'
+    },
+    {
       title: 'Login',
       url: '/login',
       icon: 'log-in'

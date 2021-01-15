@@ -45,7 +45,11 @@
         <ion-slide style="display:block;padding:250px;">
             <ion-item>
                 <ion-label position="floating">Ailment / Illness</ion-label>
-                <ion-input [(ngModel)]="illness"></ion-input>
+                <ion-searchbar style="padding-top:30px;" howCancelButton="focus" [(ngModel)]="illness" type="text" debounce="500" (ionChange)="getItems($event)"></ion-searchbar>
+                <ion-list *ngIf="isItemAvailable">
+                    <ion-item *ngFor="let item of items" (click)="test(item)">{{ item }}</ion-item>
+                </ion-list>
+
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Allergies</ion-label>

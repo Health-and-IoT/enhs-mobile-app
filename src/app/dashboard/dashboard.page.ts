@@ -4,6 +4,7 @@ import { AilmentService, Form } from '../services/af.service';
 import {Storage} from '@ionic/storage'
 import { ModalController } from '@ionic/angular';
 import { ViewformPage } from '../viewform/viewform.page';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -14,15 +15,31 @@ export class DashboardPage implements OnInit {
   public columns: any;
   public rows: any;
   private loggedIn : boolean;
-  constructor(private ailmentService: AilmentService, private storage: Storage, public modalController: ModalController) { 
+  
+  constructor(private ailmentService: AilmentService, private storage: Storage, public modalController: ModalController, private router: Router) { 
     storage.get('loggedIn').then((val) => { this.loggedIn = val})
   }
-  getRowClass = (row) => {    
+  otherFunc(row) {
+    if (row.seen == true){
+      return true;
+    }else{
+      return false;
+    }
+    
+  }
+
+  changePage(page){
+    
+    this.router.navigateByUrl('/'+page);
+  }
+
+  rowClass = (row) => {
+    console.log(row.row.seen)
     return {
-      'row-color1': row.seen == true,
-      'row-color2': row.seen == false,
+      'row-color1': row.row.seen,
+      'row-color2': !row.row.seen,
     };
-   }
+  }
 
   setPrior(level, row){
     
@@ -36,6 +53,7 @@ export class DashboardPage implements OnInit {
     this.ailmentService.getUsers().subscribe(res =>{
       this.forms = res;
       this.columns = [
+        
         {name: "Name", prop: "name"},
         //{name: "Address"},
         {name: "Date of Birth" , prop: "dob"},
