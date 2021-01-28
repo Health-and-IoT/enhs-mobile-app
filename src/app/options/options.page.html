@@ -8,14 +8,35 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Options</ion-title>
-        </ion-toolbar>
-    </ion-header>
+    <h2>Text size</h2>
+    <ion-segment (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="Small">
+          <ion-label>Small</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Medium">
+          <ion-label>Medium</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value=Large>
+            <ion-label>Large</ion-label>
+          </ion-segment-button>
+      </ion-segment>
 
-    <div id="container">
-        <strong class="capitalize">Options</strong>
-        <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-    </div>
+      <h2>Text Contrast</h2>
+      <ion-segment (ionchange)="segmentChanged($event)">
+      <ion-segment-button value="Yes">
+          <ion-label>Yes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value = "No">
+          <ion-label>No</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <h2>Notifications</h2>
+    <ion-segment (ionchange)="segmentChanged($event)">
+        <ion-segment-button value="Yes" >
+            <ion-label >Yes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value = "No">
+            <ion-label>No</ion-label>
+        </ion-segment-button>
+    </ion-segment>
 </ion-content>
