@@ -100,7 +100,7 @@ rank: String;
 
   async logout(){
     this.storage.set('loggedIn', false);
-    this.storage.set('userID', null);
+    //this.storage.set('userID', null);
     const alert = await this.alertController.create({
       header: 'Logged out!',
       message: 'You have successfully logged out. Redirecting to dashboard page.',

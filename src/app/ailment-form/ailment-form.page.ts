@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AilmentService, Form } from '../services/af.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform} from '@ionic/angular';
+
 import { Router } from '@angular/router';
+import { Patient, PatientService } from '../services/patient.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {QRCode} from 'qrcode';
 @Component({
   selector: 'app-ailment-form',
   templateUrl: './ailment-form.page.html',
   styleUrls: ['./ailment-form.page.scss'],
 
 })
+
 export class AilmentFormPage implements OnInit {
+  
 name: string;
 dob: any;
 nok: any;
@@ -21,14 +27,29 @@ knobValues: any;
 priority: string;
 dateSubmitted: string;
 seen: boolean; 
+donor: boolean;
+approved: boolean;
+sitename: string;
+siteAdd: string; 
+
 
 forms: Form[];
  slideOpts = {
     initialSlide: 0,
-    speed: 400
+    speed: 400,
+    allowTouchMove: true
   };
-  constructor(private ailmentService: AilmentService, public alertController: AlertController, private router: Router) { 
   
+  constructor(private ailmentService: AilmentService, public alertController: AlertController, private router: Router, private patientService: PatientService, private http: HttpClient, public platform: Platform) { 
+    if (this.platform.is('ios')) {
+      this.slideOpts.allowTouchMove = true;
+     }
+     if (this.platform.is('android')) {
+      
+      this.slideOpts.allowTouchMove = true;
+     }else{
+      this.slideOpts.allowTouchMove = false;
+     }
   }
 
   formatDate(date) {
@@ -47,6 +68,15 @@ forms: Form[];
     this.ailmentService.getUsers().subscribe(res =>{
       this.forms = res;
     })
+
+    this.ailmentService.getSite("111").subscribe(res =>{
+      this.sitename = res.name
+      this.siteAdd = res.address
+    })
+    
+  }
+  backSlide(slides) {
+    slides.slidePrev();
   }
   nextSlide(slides) {
     slides.slideNext();
@@ -111,9 +141,31 @@ forms: Form[];
   }
   
   gatherInfo() {
-    let form: Form = {name: this.name, dob: this.formatDate(this.dob), nok: this.nok, address: this.address, chinumber: this.chinumber, illness: this.illness, allergies: this.allergies, pain: this.knobValues, priority: this.getPrior(), dateSubmitted: this.getDate(), seen: this.seen}
+    let patient: Patient = {name: this.name, dob: this.formatDate(this.dob), nok: this.nok, address: this.address, chinumber: this.chinumber,  allergies: this.allergies, donor: true}
+    let form: Form = {Ailment: this.illness, Pain: this.knobValues, Priority: this.getPrior(), DateSubmitted: this.getDate(), Seen: this.seen, patient: "", Approved: false, DocID: ""}
     
-    this.ailmentService.addUser(form);
+    const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+       Accept: 'application/json',
+       'Access-Control-Allow-Origin': '*',
+     
+       //api token (if need)
+});    
+const options = {
+  headers: header
+}
+let obj = {
+  patient,
+  form}
+  ;
+let response = this.http.post("http://localhost:8080/", obj, options);
+   response.toPromise().then(data => {
+     console.log('response: ', data);
+     //TODO: handle HTTP errors
+   }).catch((err) =>{
+      console.log('error', err);
+   });
+    //this.ailmentService.addUser(form);
     this.completedForm();
   }
 }
