@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ClickType } from '@swimlane/ngx-datatable';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -15,13 +17,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OptionsPage implements OnInit {
 
-  constructor() { 
-
+ 
+  text:string;
+  locale:string;
+  rate:number;
+  segmentChanged(
+  ){
+    
   }
-  segmentChanged(){}
 
   ngOnInit() {
   }
+
+  constructor(){
+
+  }
+
+ 
 
 }
 

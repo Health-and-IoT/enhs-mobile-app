@@ -23,20 +23,46 @@
 
       <h2>Text Contrast</h2>
       <ion-segment (ionchange)="segmentChanged($event)">
-      <ion-segment-button value="Yes">
-          <ion-label>Yes</ion-label>
+      <ion-segment-button value="On">
+          <ion-label>On</ion-label>
       </ion-segment-button>
-      <ion-segment-button value = "No">
-          <ion-label>No</ion-label>
+      <ion-segment-button value = "Off">
+          <ion-label>Off</ion-label>
       </ion-segment-button>
     </ion-segment>
     <h2>Notifications</h2>
     <ion-segment (ionchange)="segmentChanged($event)">
-        <ion-segment-button value="Yes" >
-            <ion-label >Yes</ion-label>
+        <ion-segment-button value="On" >
+            <ion-label >On</ion-label>
         </ion-segment-button>
-        <ion-segment-button value = "No">
-            <ion-label>No</ion-label>
+        <ion-segment-button value = "Off">
+            <ion-label>Off</ion-label>
         </ion-segment-button>
     </ion-segment>
+    <h2>Text to speech</h2>
+    <ion-segment (ionchange)="segmentChanged($event)">
+        <ion-segment-button value="On" >
+            <ion-label >On</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value = "Off">
+            <ion-label>Off</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+    <ion-item>
+        <ion-label>Text</ion-label>
+        <ion-input [(ngModel)]="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-range min="1" max="30" step="1" [(ngModel)]="rate">
+            <ion-icon small range-left name="remove"></ion-icon>
+            <ion-icon small range-right name="add"></ion-icon>
+        </ion-range>
+    </ion-item>
+    <ion-label>Language</ion-label>
+    <ion-select [(ngModel)]="locale">
+        <ion-item value="ru_RU">Russian</ion-item>
+        <ion-item value="en_US">English</ion-item>
+    </ion-select>
+    <button ion-button full (click)="playtext()">Play Text</button>
 </ion-content>
