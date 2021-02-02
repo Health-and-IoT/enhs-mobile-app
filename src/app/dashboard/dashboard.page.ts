@@ -6,8 +6,9 @@ import { ModalController } from '@ionic/angular';
 import { ViewformPage } from '../viewform/viewform.page';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Patient } from '../services/patient.service';
+
 import { LoginService } from '../services/login.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -19,8 +20,9 @@ export class DashboardPage implements OnInit {
   public rows: any;
   private loggedIn : boolean;
   private rank;
+  isEditable = {};
   
-  constructor(private ailmentService: AilmentService,private loginService: LoginService, private storage: Storage, public modalController: ModalController, private router: Router, private http: HttpClient) { 
+  constructor(private route: ActivatedRoute, private ailmentService: AilmentService,private loginService: LoginService, private storage: Storage, public modalController: ModalController, private router: Router, private http: HttpClient) { 
     storage.get('loggedIn').then((val) => { this.loggedIn = val}),
     
     storage.get('userID').then((val) => {  this.loginService.getUser(val)
@@ -38,6 +40,30 @@ export class DashboardPage implements OnInit {
       return false;
     }
     
+  }
+
+  
+
+  // Save row
+  save(row, rowIndex){
+    this.isEditable[rowIndex]=!this.isEditable[rowIndex]
+    console.log("Row saved: "+ rowIndex);
+    this.ailmentService.updateVisit(row.docId, row)
+    .subscribe((response)=>{
+       
+        console.log(response); //<-- not undefined anymore
+    });
+  }
+
+  // Delete row
+  delete(row :any , rowIndex){
+    this.isEditable[rowIndex]=!this.isEditable[rowIndex]
+    console.log(row.docID);
+    this.ailmentService.deleteForm(row.docID)
+    .subscribe((response)=>{
+       
+        console.log(response); //<-- not undefined anymore
+    });
   }
 
   changePage(page){
@@ -77,8 +103,10 @@ export class DashboardPage implements OnInit {
     });
     
   }
+  
   async ngOnInit()  {
     
+
     this.ailmentService.getForms()
     .subscribe((response)=>{
         this.rows = response;
@@ -131,9 +159,6 @@ export class DashboardPage implements OnInit {
    
   }
 
-  edit(value) {
-    console.log(value);
-  }
 
   checkStatus(){
     if(this.loggedIn == true){
@@ -170,9 +195,7 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  delete(value) {
-    console.log(value);
-  }
+  
  
 
 }

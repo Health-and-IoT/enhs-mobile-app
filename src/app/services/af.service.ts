@@ -103,7 +103,23 @@ updateVisit(id: any, row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/updateV/" + id, row, options).pipe(map((response: any) => response));
+  return this.http.post("http://localhost:8080/updateForm/" + id, row, options).pipe(map((response: any) => response));
+}
+
+deleteForm(id: any) : Observable<any> {
+       
+    const header = new HttpHeaders({
+        'Content-Type': 'application/json',
+         Accept: 'application/json',
+         'Access-Control-Allow-Origin': '*',
+       
+         //api token (if need)
+  });    
+  const options = {
+    headers: header
+  }
+  
+  return this.http.post("http://localhost:8080/deleteForm/" + id, options).pipe(map((response: any) => response));
 }
 
 getSite(id: any) : Observable<any> {

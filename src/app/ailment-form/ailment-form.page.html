@@ -23,7 +23,7 @@
             <ion-label position="floating">{{siteAdd}}</ion-label>
             <ion-item>
                 <ion-label position="floating">Name</ion-label>
-                <ion-input [(ngModel)]="name"></ion-input>
+                <ion-input [(ngModel)]="name" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Date Of Birth</ion-label>
@@ -34,7 +34,7 @@
                 <ion-input [(ngModel)]="nok"></ion-input>
             </ion-item>
 
-            <ion-button color="primary" (click)="nextSlide(slides)">Next</ion-button>
+            <ion-button color="primary" (click)="nextSlide(slides)" [disabled]="!name || !dob || !nok">Next</ion-button>
         </ion-slide>
         <ion-slide style="display:block;padding:250px;">
             <ion-item>
@@ -46,7 +46,7 @@
                 <ion-input [(ngModel)]="chinumber"></ion-input>
             </ion-item>
             <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-            <ion-button color="primary" (click)="nextSlide(slides)" style="margin-left:2%">Next</ion-button>
+            <ion-button color="primary" (click)="nextSlide(slides)" style="margin-left:2%" [disabled]="!address">Next</ion-button>
         </ion-slide>
         <ion-slide style="display:block;padding:250px;">
             <ion-item>
@@ -62,7 +62,7 @@
                 <ion-input [(ngModel)]="allergies"></ion-input>
             </ion-item>
             <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-            <ion-button color="primary" (click)="nextSlide(slides)" style="margin-left:2%">Next</ion-button>
+            <ion-button color="primary" (click)="nextSlide(slides)" style="margin-left:2%" [disabled]="!illness">Next</ion-button>
 
         </ion-slide>
         <ion-slide style="display:block;padding:250px;">
@@ -76,7 +76,7 @@
             </ion-range>
             <ion-label position="center">{{knobValues}}</ion-label>
             <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-            <ion-button color="success" (click)="gatherInfo()" style="margin-left:2%">Submit</ion-button>
+            <ion-button color="success" (click)="gatherInfo()" style="margin-left:2%" [disabled]="!knobValues">Submit</ion-button>
         </ion-slide>
 
     </ion-slides>

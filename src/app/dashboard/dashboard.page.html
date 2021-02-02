@@ -80,12 +80,53 @@
                     </ion-title>
                 </ion-toolbar>
 
-                <ngx-datatable *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns"
-                    [reorderable]="reorderable">
-                    <ngx-datatable-column name="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
-                    <ngx-datatable-column *ngFor="let column of columns; 
-                    let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]"
+                    [columns]="columns" [reorderable]="reorderable">
+                    <ngx-datatable-column [flexGrow]="0.5" [width]="50">
+                        <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            <!-- Pencil icon -->
+                            <ion-icon name="pencil" title="Modify" *ngIf="!this.isEditable[rowIndex]" (click)="this.isEditable[rowIndex]=!this.isEditable[rowIndex]"></ion-icon>
+
+
+                            <!-- Save/Delete icons -->
+                            <ion-icon name="save" *ngIf="this.isEditable[rowIndex]" title="Save" (click)="save(row, rowIndex);"></ion-icon>
+                            <ion-icon name="trash" *ngIf="this.isEditable[rowIndex]" title="Delete" (click)="delete(row,rowIndex)"></ion-icon>
+
+                        </ng-template>
                     </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
+
+                    <ngx-datatable-column [flexGrow]="1.5" name="Ailment" prop="ailment">
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                            <ion-input value="ailment" [(ngModel)]="row.ailment" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column [flexGrow]="1.5" name="Date" prop="DateSubmitted">
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                            <ion-input value="dateSubmitted" [(ngModel)]="row.dateSubmitted" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column [flexGrow]="1.5" name="Patient" prop="patient">
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                            <ion-input value="pain" [(ngModel)]="row.patient" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column [flexGrow]="1.5" name="Pain" prop="pain">
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                            <ion-input value="pain" [(ngModel)]="row.pain" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                        </ng-template>
+                    </ngx-datatable-column>
+
 
                     <ngx-datatable-column name="Priority" sortable="false">
                         <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
