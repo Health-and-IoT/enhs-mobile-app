@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Patient, PatientService } from '../services/patient.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {QRCode} from 'qrcode';
+import { runInThisContext } from 'vm';
 @Component({
   selector: 'app-ailment-form',
   templateUrl: './ailment-form.page.html',
@@ -68,7 +69,7 @@ forms: Form[];
     this.ailmentService.getUsers().subscribe(res =>{
       this.forms = res;
     })
-
+   
     this.ailmentService.getSite("111").subscribe(res =>{
       this.sitename = res.name
       this.siteAdd = res.address
@@ -118,8 +119,12 @@ forms: Form[];
         "coma","stomach_bleeding","distention_of_abdomen","history_of_alcohol_consumption","fluid_overload","blood_in_sputum","prominent_veins_on_calf","palpitations",
       "painful_walking","pus_filled_pimples","blackheads","scurring","skin_peeling","silver_like_dusting","small_dents_in_nails","inflammatory_nails","blister","red_sore_around_nose",
         "yellow_crust_ooze"];
+        this.items.sort();
      }
+    
      test(item){
+     
+
        this.illness = item
        console.log(item)
      }
@@ -127,7 +132,8 @@ forms: Form[];
      getItems(ev: any) {
          // Reset items back to all of the items
          this.initializeItems();
-
+         
+         this.initializeItems()
          // set val to the value of the searchbar
          const val = ev.target.value;
 
