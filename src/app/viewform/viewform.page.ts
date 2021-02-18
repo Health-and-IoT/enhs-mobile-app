@@ -1,5 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Form } from '../services/af.service';
+import { Form, AilmentService } from '../services/af.service';
+import { Patient } from '../services/patient.service';
 
 @Component({
   selector: 'app-viewform',
@@ -8,10 +10,32 @@ import { Form } from '../services/af.service';
 })
 export class ViewformPage implements OnInit {
   @Input() form: Form;
-  constructor() { }
+  patient: Patient;
+  visits : any;
+  
+  
+  constructor(private http: HttpClient, private ailmentService: AilmentService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.patient = {name: "", nok: "", dob: "", address: "", allergies: "", chinumber: "", donor: false}
     
-  }
+    this.ailmentService.getVisits(this.form.patient)
+  .subscribe((response)=>{
+    
+    this.visits = response
+    this.ailmentService.getPatient(this.form.patient)
+  .subscribe((response)=>{
+    
+    this.patient = response
+    
+  
+  });
+  
+  });
+
+
+}
+
+
 
 }

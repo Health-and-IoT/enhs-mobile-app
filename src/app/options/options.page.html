@@ -8,14 +8,61 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Options</ion-title>
-        </ion-toolbar>
-    </ion-header>
+    <h2>Text size</h2>
+    <ion-segment (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="Small">
+            <ion-label>Small</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Medium">
+            <ion-label>Medium</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value=Large>
+            <ion-label>Large</ion-label>
+        </ion-segment-button>
+    </ion-segment>
 
-    <div id="container">
-        <strong class="capitalize">Options</strong>
-        <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-    </div>
+    <h2>Text Contrast</h2>
+    <ion-segment (ionchange)="segmentChanged($event)">
+        <ion-segment-button value="On">
+            <ion-label>On</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Off">
+            <ion-label>Off</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    <h2>Notifications</h2>
+    <ion-segment (ionchange)="segmentChanged($event)">
+        <ion-segment-button value="On">
+            <ion-label>On</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Off">
+            <ion-label>Off</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    <h2>Text to speech</h2>
+    <ion-segment (ionchange)="segmentChanged($event)">
+        <ion-segment-button value="On">
+            <ion-label>On</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Off">
+            <ion-label>Off</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+    <ion-item>
+        <ion-label>Text</ion-label>
+        <ion-input [(ngModel)]="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-range min="1" max="30" step="1" [(ngModel)]="rate">
+            <ion-icon small range-left name="remove"></ion-icon>
+            <ion-icon small range-right name="add"></ion-icon>
+        </ion-range>
+    </ion-item>
+    <ion-label>Language</ion-label>
+    <ion-select [(ngModel)]="locale">
+        <ion-item value="ru_RU">Russian</ion-item>
+        <ion-item value="en_US">English</ion-item>
+    </ion-select>
+    <button ion-button full (click)="playText()">Play Text</button>
 </ion-content>

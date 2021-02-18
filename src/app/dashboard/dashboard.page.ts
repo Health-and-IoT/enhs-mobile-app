@@ -5,6 +5,10 @@ import {Storage} from '@ionic/storage'
 import { ModalController } from '@ionic/angular';
 import { ViewformPage } from '../viewform/viewform.page';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { LoginService } from '../services/login.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -15,17 +19,51 @@ export class DashboardPage implements OnInit {
   public columns: any;
   public rows: any;
   private loggedIn : boolean;
+  private rank;
+  isEditable = {};
   
-  constructor(private ailmentService: AilmentService, private storage: Storage, public modalController: ModalController, private router: Router) { 
-    storage.get('loggedIn').then((val) => { this.loggedIn = val})
+  constructor(private route: ActivatedRoute, private ailmentService: AilmentService,private loginService: LoginService, private storage: Storage, public modalController: ModalController, private router: Router, private http: HttpClient) { 
+    storage.get('loggedIn').then((val) => { this.loggedIn = val}),
+    
+    storage.get('userID').then((val) => {  this.loginService.getUser(val)
+      .subscribe((response)=>{
+        
+         this.rank = response.rank
+      });})
+      
+   
   }
   otherFunc(row) {
-    if (row.seen == true){
+    if (row.Seen == true){
       return true;
     }else{
       return false;
     }
     
+  }
+
+  
+
+  // Save row
+  save(row, rowIndex){
+    this.isEditable[rowIndex]=!this.isEditable[rowIndex]
+    console.log("Row saved: "+ rowIndex);
+    this.ailmentService.updateVisit(row.docId, row)
+    .subscribe((response)=>{
+       
+        console.log(response); //<-- not undefined anymore
+    });
+  }
+
+  // Delete row
+  delete(row :any , rowIndex){
+    this.isEditable[rowIndex]=!this.isEditable[rowIndex]
+    console.log(row.docID);
+    this.ailmentService.deleteForm(row.docID)
+    .subscribe((response)=>{
+       
+        console.log(response); //<-- not undefined anymore
+    });
   }
 
   changePage(page){
@@ -34,7 +72,7 @@ export class DashboardPage implements OnInit {
   }
 
   rowClass = (row) => {
-    console.log(row.row.seen)
+
     return {
       'row-color1': row.row.seen,
       'row-color2': !row.row.seen,
@@ -46,48 +84,81 @@ export class DashboardPage implements OnInit {
     row.priority = level
     row.seen = true
     
-    this.ailmentService.updateUser(row.id, row)
+    this.ailmentService.updateVisit(row.docId, row)
+    .subscribe((response)=>{
+       
+        console.log(response); //<-- not undefined anymore
+    });
   }
-  ngOnInit() {
+
+  setType(level, row){
+    console.log("x")
+    row.approved = level
     
-    this.ailmentService.getUsers().subscribe(res =>{
-      this.forms = res;
+    console.log(row)
+    this.ailmentService.updateVisit(row.docId, row)
+    .subscribe((response)=>{
+       
+        console.log(response); //<-- not undefined anymore
+    });
+    
+  }
+  
+  async ngOnInit()  {
+    
+
+    this.ailmentService.getForms()
+    .subscribe((response)=>{
+        this.rows = response;
+        console.log(this.rows); //<-- not undefined anymore
+    });
+    
       this.columns = [
         
-        {name: "Name", prop: "name"},
+        {name: "Ailment" },
         //{name: "Address"},
-        {name: "Date of Birth" , prop: "dob"},
+        {name: "Date" , prop: "dateSubmitted"},
         //{name: "NOK"},
-        {name: "CHI Number", prop: "chinumber"},
-        {name: "Illness"},
-        {name: "Allergies"},
+        {name: "Patient"},
+       
+      
         {name: "Pain"},
+      
         
-        
-        {name: "Date Sent", prop: "dateSubmitted"}
-        
-
+  
         
       ]
-     
-      this.rows = this.forms;
-    })
+      
+   
+   
+   
+   
+   
+    
+      
+      
+   
+   
   }
 
+  
   async viewForm(row) {
+    
     const modal = await this.modalController.create({
       component: ViewformPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'form' : row
+        'form' : row,
+       
+        
       }
     });
     return await modal.present();
+
+
+   
   }
 
-  edit(value) {
-    console.log(value);
-  }
 
   checkStatus(){
     if(this.loggedIn == true){
@@ -97,6 +168,25 @@ export class DashboardPage implements OnInit {
     }
   }
 
+  checkStaff(){
+    if(this.rank == "staff"){
+      
+      return true;
+    }else{
+      return false;
+    }
+    
+   
+  }
+
+  checkDoctor(){
+    if(this.rank == "doctor"){
+     
+      return true;
+    }else{
+      return false;
+    }
+  }
   checkStatus2(){
     if(this.loggedIn == true){
       return false;
@@ -105,9 +195,7 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  delete(value) {
-    console.log(value);
-  }
+  
  
 
 }
