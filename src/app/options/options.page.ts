@@ -28,9 +28,12 @@ export class OptionsPage implements OnInit {
 
   ngOnInit() {
   }
-
+  Text = [];
   constructor(){
 
+  }
+  playText(){
+    
   }
 
  

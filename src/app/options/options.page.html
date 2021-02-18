@@ -11,40 +11,40 @@
     <h2>Text size</h2>
     <ion-segment (ionChange)="segmentChanged($event)">
         <ion-segment-button value="Small">
-          <ion-label>Small</ion-label>
+            <ion-label>Small</ion-label>
         </ion-segment-button>
         <ion-segment-button value="Medium">
-          <ion-label>Medium</ion-label>
+            <ion-label>Medium</ion-label>
         </ion-segment-button>
         <ion-segment-button value=Large>
             <ion-label>Large</ion-label>
-          </ion-segment-button>
-      </ion-segment>
+        </ion-segment-button>
+    </ion-segment>
 
-      <h2>Text Contrast</h2>
-      <ion-segment (ionchange)="segmentChanged($event)">
-      <ion-segment-button value="On">
-          <ion-label>On</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value = "Off">
-          <ion-label>Off</ion-label>
-      </ion-segment-button>
+    <h2>Text Contrast</h2>
+    <ion-segment (ionchange)="segmentChanged($event)">
+        <ion-segment-button value="On">
+            <ion-label>On</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Off">
+            <ion-label>Off</ion-label>
+        </ion-segment-button>
     </ion-segment>
     <h2>Notifications</h2>
     <ion-segment (ionchange)="segmentChanged($event)">
-        <ion-segment-button value="On" >
-            <ion-label >On</ion-label>
+        <ion-segment-button value="On">
+            <ion-label>On</ion-label>
         </ion-segment-button>
-        <ion-segment-button value = "Off">
+        <ion-segment-button value="Off">
             <ion-label>Off</ion-label>
         </ion-segment-button>
     </ion-segment>
     <h2>Text to speech</h2>
     <ion-segment (ionchange)="segmentChanged($event)">
-        <ion-segment-button value="On" >
-            <ion-label >On</ion-label>
+        <ion-segment-button value="On">
+            <ion-label>On</ion-label>
         </ion-segment-button>
-        <ion-segment-button value = "Off">
+        <ion-segment-button value="Off">
             <ion-label>Off</ion-label>
         </ion-segment-button>
     </ion-segment>
@@ -64,5 +64,5 @@
         <ion-item value="ru_RU">Russian</ion-item>
         <ion-item value="en_US">English</ion-item>
     </ion-select>
-    <button ion-button full (click)="playtext()">Play Text</button>
+    <button ion-button full (click)="playText()">Play Text</button>
 </ion-content>

@@ -55,7 +55,7 @@ export class AilmentService{
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getPatients", options).pipe(map((response: any) => response));
+  return this.http.post("http://146.176.251.23/getPatients", options).pipe(map((response: any) => response));
 }
 
 getPatient(row : any) : Observable<any> {
@@ -71,7 +71,7 @@ getPatient(row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getPatient/" + row, options).pipe(map((response: any) => response));
+  return this.http.post("http://146.176.251.23/getPatient/" + row, options).pipe(map((response: any) => response));
 }
 
 getVisits(row : any) : Observable<any> {
@@ -87,7 +87,7 @@ getVisits(row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getVisits/" + row, options).pipe(map((response: any) =>response));
+  return this.http.post("http://146.176.251.23/getVisits/" + row, options).pipe(map((response: any) =>response));
 }
 
 updateVisit(id: any, row : any) : Observable<any> {
@@ -103,7 +103,7 @@ updateVisit(id: any, row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/updateForm/" + id, row, options).pipe(map((response: any) => response));
+  return this.http.post("http://146.176.251.23/updateForm/" + id, row, options).pipe(map((response: any) => response));
 }
 
 deleteForm(id: any) : Observable<any> {
@@ -119,7 +119,7 @@ deleteForm(id: any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/deleteForm/" + id, options).pipe(map((response: any) => response));
+  return this.http.post("http://146.176.251.23/deleteForm/" + id, options).pipe(map((response: any) => response));
 }
 
 getSite(id: any) : Observable<any> {
@@ -135,7 +135,7 @@ getSite(id: any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getSite/" + id, options).pipe(map((response: any) => response));
+  return this.http.post("http://146.176.251.23/getSite/" + id, options).pipe(map((response: any) => response));
 }
    
     
