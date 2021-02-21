@@ -31,6 +31,7 @@
     "cordova-plugin-tts": "^0.2.3",
     "crypto-js": "^4.0.0",
     "firebase": "^8.2.1",
+    "ionic-selectable": "^4.7.1",
     "qrcode": "^1.4.4",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

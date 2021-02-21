@@ -8,7 +8,7 @@ import { Storage } from '@ionic/storage';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 export interface Form{
-    Ailment: string;
+    Ailment: string[];
     Pain: string;
     Priority: string;
     DateSubmitted: string;
@@ -16,6 +16,8 @@ export interface Form{
     patient: string; 
     Approved: boolean;
     DocID: string;
+    ProgList: string;
+    FinProg: string;
 }
 @Injectable({
     providedIn: 'root'
@@ -55,7 +57,7 @@ export class AilmentService{
     headers: header
   }
   
-  return this.http.post("http://146.176.251.23/getPatients", options).pipe(map((response: any) => response));
+  return this.http.post("http://localhost:8080/getPatients", options).pipe(map((response: any) => response));
 }
 
 getPatient(row : any) : Observable<any> {
@@ -71,7 +73,7 @@ getPatient(row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://146.176.251.23/getPatient/" + row, options).pipe(map((response: any) => response));
+  return this.http.post("http://localhost:8080/getPatient/" + row, options).pipe(map((response: any) => response));
 }
 
 getVisits(row : any) : Observable<any> {
@@ -87,9 +89,24 @@ getVisits(row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://146.176.251.23/getVisits/" + row, options).pipe(map((response: any) =>response));
+  return this.http.post("http://localhost:8080/getVisits/" + row, options).pipe(map((response: any) =>response));
 }
 
+getSymptoms() : Observable<any> {
+       
+  const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+       Accept: 'application/json',
+       'Access-Control-Allow-Origin': '*',
+     
+       //api token (if need)
+});    
+const options = {
+  headers: header
+}
+
+return this.http.get("http://localhost:8080/symptoms", options).pipe(map((response: any) =>response));
+}
 updateVisit(id: any, row : any) : Observable<any> {
        
     const header = new HttpHeaders({
@@ -103,7 +120,7 @@ updateVisit(id: any, row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://146.176.251.23/updateForm/" + id, row, options).pipe(map((response: any) => response));
+  return this.http.post("http://localhost:8080/updateForm/" + id, row, options).pipe(map((response: any) => response));
 }
 
 deleteForm(id: any) : Observable<any> {
@@ -119,7 +136,7 @@ deleteForm(id: any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://146.176.251.23/deleteForm/" + id, options).pipe(map((response: any) => response));
+  return this.http.post("http://localhost:8080/deleteForm/" + id, options).pipe(map((response: any) => response));
 }
 
 getSite(id: any) : Observable<any> {
@@ -135,7 +152,7 @@ getSite(id: any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://146.176.251.23/getSite/" + id, options).pipe(map((response: any) => response));
+  return this.http.post("http://localhost:8080/getSite/" + id, options).pipe(map((response: any) => response));
 }
    
     

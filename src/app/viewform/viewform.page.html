@@ -48,6 +48,17 @@
                 <ion-label>Illness: {{i.ailment}}</ion-label>
                 <ion-label>DateSubmitted: {{i.dateSubmitted}}</ion-label>
             </ion-item>
+            <ion-list-header>
+                <ion-label>Diagnosis</ion-label>
+            </ion-list-header>
+            <ion-item *ngFor="let i of progList">
+                <ion-label>Prognosis: {{i.name}}
+
+                </ion-label>
+                <ion-badge slot="end" *ngIf="i.sympCount < 3 && i.sympCount > 1" color="warning">{{i.sympCount}}</ion-badge>
+                <ion-badge slot="end" *ngIf="i.sympCount < 2 && i.sympCount > 0">{{i.sympCount}}</ion-badge>
+                <ion-badge slot="end" color="danger" *ngIf="i.sympCount >= 3">{{i.sympCount}}</ion-badge>
+            </ion-item>
 
         </ion-list>
 

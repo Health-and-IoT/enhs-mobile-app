@@ -9,16 +9,22 @@ import { Patient } from '../services/patient.service';
   styleUrls: ['./viewform.page.scss'],
 })
 export class ViewformPage implements OnInit {
-  @Input() form: Form;
+  @Input() form: any;
   patient: Patient;
   visits : any;
+  progList : any;
   
   
   constructor(private http: HttpClient, private ailmentService: AilmentService) { }
 
   async ngOnInit() {
     this.patient = {name: "", nok: "", dob: "", address: "", allergies: "", chinumber: "", donor: false}
-    
+   
+    this.progList = JSON.parse(this.form.progList)
+    this.progList.sort(function(a, b) {
+      return parseFloat(b.sympCount) - parseFloat(a.sympCount) ;
+  });
+  console.log(this.progList)
     this.ailmentService.getVisits(this.form.patient)
   .subscribe((response)=>{
     

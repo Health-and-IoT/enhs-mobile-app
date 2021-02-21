@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AilmentFormPageRoutingModule } from './ailment-form-routing.module';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { AilmentFormPage } from './ailment-form.page';
 
@@ -13,6 +14,7 @@ import { AilmentFormPage } from './ailment-form.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    IonicSelectableModule,
     AilmentFormPageRoutingModule
   ],
   declarations: [AilmentFormPage]

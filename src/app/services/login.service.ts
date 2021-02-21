@@ -59,7 +59,7 @@ export class LoginService{
         headers: header
       }
       
-      return this.http.post("http://146.176.251.23/login/", obj, options).pipe(map((response: any) => response));
+      return this.http.post("http://localhost:8080/login/", obj, options).pipe(map((response: any) => response));
     }
 
     getUser(id) : Observable<any> {
@@ -75,7 +75,7 @@ export class LoginService{
         headers: header
       }
       
-      return this.http.post("http://146.176.251.23/getUser/"+id, options).pipe(map((response: any) => response));
+      return this.http.post("http://localhost:8080/getUser/"+id, options).pipe(map((response: any) => response));
     }
     
     updateUser(user:User, id:string){

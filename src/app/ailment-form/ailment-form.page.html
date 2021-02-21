@@ -51,10 +51,16 @@
         <ion-slide style="display:block;padding:250px;">
             <ion-item>
                 <ion-label position="floating">Ailment / Illness</ion-label>
-                <ion-searchbar style="padding-top:30px;" howCancelButton="focus" [(ngModel)]="illness" type="text" debounce="500" (ionChange)="getItems($event)"></ion-searchbar>
+                <ion-item>
+                    <ion-label>Ailment / Illness</ion-label>
+                    <ionic-selectable [(ngModel)]="s" [items]="ports" itemValueField="id" [isMultiple]="true" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)">
+                    </ionic-selectable>
+                </ion-item>
+                <!-- <ion-searchbar style="padding-top:30px;" howCancelButton="focus" [(ngModel)]="illness" type="text" debounce="500" (ionChange)="getItems($event)"></ion-searchbar>
+
                 <ion-list *ngIf="isItemAvailable">
                     <ion-item *ngFor="let item of items" (click)="test(item)">{{ item }}</ion-item>
-                </ion-list>
+                </ion-list> -->
 
             </ion-item>
             <ion-item>
@@ -62,7 +68,7 @@
                 <ion-input [(ngModel)]="allergies"></ion-input>
             </ion-item>
             <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-            <ion-button color="primary" (click)="nextSlide(slides)" style="margin-left:2%" [disabled]="!illness">Next</ion-button>
+            <ion-button color="primary" (click)="nextSlide(slides)" style="margin-left:2%" [disabled]="!s">Next</ion-button>
 
         </ion-slide>
         <ion-slide style="display:block;padding:250px;">
