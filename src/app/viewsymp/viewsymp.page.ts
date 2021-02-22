@@ -23,6 +23,11 @@ export class ViewsympPage implements OnInit {
    
     this.progList = JSON.parse(this.form.progList)
     this.symptoms = this.form.symptoms
+
+    for (var i = 0; i < this.symptoms.length; i++) {
+      this.symptoms[i] = this.symptoms[i].replace(/(?:_|^)([a-z]+)/g, (m, g1) => g1.charAt(0).toUpperCase() + g1.substr(1).toLowerCase() + " ");
+      //Do something
+  }
     this.progList.sort(function(a, b) {
       return parseFloat(b.sympCount) - parseFloat(a.sympCount) ;
   });
