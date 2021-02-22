@@ -41,6 +41,7 @@ approved: boolean;
 sitename: string;
 siteAdd: string; 
 sitecode: string;
+email: string;
 
 
 forms: Form[];
@@ -60,29 +61,20 @@ forms: Form[];
      }else{
       this.slideOpts.allowTouchMove = false;
      }
-     this.ports = [];
-     this.symptoms = [];
-     this.ailmentService.getSymptoms()
-    .subscribe((response)=>{
-       
-       this.ports = response;
-       this.ports.sort(function(a, b) {
-        var textA = a.name.toUpperCase();
-        var textB = b.name.toUpperCase();
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
-    });
+     
    
    
     
   }
+ 
   portChange(event: {
     component: IonicSelectableComponent,
     value: any
   }) {
     
     this.s.push(event.value)
-    console.log(this.s)
+    console.log(this.s[0])
+    console.log(this.s[1])
   }
   formatDate(date) {
     var d = new Date(date),
@@ -100,7 +92,19 @@ forms: Form[];
     this.ailmentService.getUsers().subscribe(res =>{
       this.forms = res;
     })
-   
+    this.ports = [];
+    this.symptoms = [];
+    this.ailmentService.getSymptoms()
+   .subscribe((response)=>{
+      
+      this.ports = response;
+      console.log(this.ports[0].name)
+      this.ports.sort(function(a, b) {
+       var textA = a.name.toUpperCase();
+       var textB = b.name.toUpperCase();
+       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+   });
+   });
    
     
   }
@@ -196,7 +200,7 @@ forms: Form[];
     } 
    
     let patient: Patient = {name: this.name, dob: this.formatDate(this.dob), nok: this.nok, address: this.address, chinumber: this.chinumber,  allergies: this.allergies, donor: true}
-    let form: Form = {Ailment: this.symptoms, Pain: this.knobValues, Priority: this.getPrior(), DateSubmitted: this.getDate(), Seen: this.seen, patient: "", Approved: false, DocID: "", ProgList: "", FinProg: ""}
+    let form: Form = {Symptoms: this.symptoms, Pain: this.knobValues, Priority: this.getPrior(), DateSubmitted: this.getDate(), Seen: this.seen, patient: "", Approved: false, DocID: "", ProgList: "", FinProg: "", SiteID: this.sitecode, Email: this.email}
     
     const header = new HttpHeaders({
       'Content-Type': 'application/json',

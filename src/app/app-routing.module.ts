@@ -46,7 +46,11 @@ const routes: Routes = [
   {
     path: 'options',
     loadChildren: () => import('./options/options.module').then( m => m.OptionsPageModule)
+  },  {
+    path: 'viewsymp',
+    loadChildren: () => import('./viewsymp/viewsymp.module').then( m => m.ViewsympPageModule)
   }
+
 ];
 
 @NgModule({

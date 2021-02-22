@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { AilmentService, Form } from '../services/af.service';
 import {Storage} from '@ionic/storage'
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ViewformPage } from '../viewform/viewform.page';
+import { ViewsympPage } from '../viewsymp/viewsymp.page';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -20,15 +21,40 @@ export class DashboardPage implements OnInit {
   public rows: any;
   private loggedIn : boolean;
   private rank;
+
+  mobile: boolean;
   isEditable = {};
   
-  constructor(private route: ActivatedRoute, private ailmentService: AilmentService,private loginService: LoginService, private storage: Storage, public modalController: ModalController, private router: Router, private http: HttpClient) { 
+  constructor(public platform: Platform, private route: ActivatedRoute, private ailmentService: AilmentService,private loginService: LoginService, private storage: Storage, public modalController: ModalController, private router: Router, private http: HttpClient) { 
+   
     storage.get('loggedIn').then((val) => { this.loggedIn = val}),
     
     storage.get('userID').then((val) => {  this.loginService.getUser(val)
       .subscribe((response)=>{
         
          this.rank = response.rank
+       
+         this.ailmentService.getForms(response.siteid)
+    .subscribe((response)=>{
+        this.rows = response;
+        console.log(this.rows); //<-- not undefined anymore
+    });
+    
+      this.columns = [
+        
+        {name: "Symptoms" },
+        //{name: "Address"},
+        {name: "Date" , prop: "dateSubmitted"},
+        //{name: "NOK"},
+        {name: "Patient"},
+       
+      
+        {name: "Pain"},
+      
+        
+  
+        
+      ]
       });})
       
    
@@ -105,43 +131,26 @@ export class DashboardPage implements OnInit {
   }
   
   async ngOnInit()  {
-    
 
-    this.ailmentService.getForms()
-    .subscribe((response)=>{
-        this.rows = response;
-        console.log(this.rows); //<-- not undefined anymore
-    });
-    
-      this.columns = [
-        
-        {name: "Ailment" },
-        //{name: "Address"},
-        {name: "Date" , prop: "dateSubmitted"},
-        //{name: "NOK"},
-        {name: "Patient"},
-       
-      
-        {name: "Pain"},
-      
-        
-  
-        
-      ]
-      
-   
-   
-   
-   
-   
-    
-      
-      
-   
    
   }
 
-  
+  async viewSymp(row) {
+    
+    const modal = await this.modalController.create({
+      component: ViewsympPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'form' : row,
+       
+        
+      }
+    });
+    return await modal.present();
+
+
+   
+  }
   async viewForm(row) {
     
     const modal = await this.modalController.create({

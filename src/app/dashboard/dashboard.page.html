@@ -27,7 +27,7 @@
                             <ion-card-title>Ailment Form</ion-card-title>
                         </ion-card-header>
 
-                        <ion-card-content>
+                        <ion-card-content class="ion-text-wrap">
                             Click here to access the Ailment Form to allow for you to be assessed and provided assistance by your GP / A&E.
                         </ion-card-content>
 
@@ -97,10 +97,12 @@
 
                     <ngx-datatable-column name="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
 
-                    <ngx-datatable-column [flexGrow]="1.5" name="Ailment" prop="ailment">
+                    <ngx-datatable-column [flexGrow]="1.5" name="Symptoms" prop="symptoms">
                         <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 
-                            <ion-input value="ailment" [(ngModel)]="row.ailment" [disabled]="!isEditable[rowIndex]"></ion-input>
+                            <ion-button style="float:left;" color="primary" (click)="viewSymp(row)">
+                                View
+                            </ion-button>
 
 
                         </ng-template>

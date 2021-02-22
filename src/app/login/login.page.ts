@@ -33,7 +33,7 @@ siteid:number;
     //console.log(this.password);
     //console.log(decrypted);
     //let login1: User = {username: this.username, password:this.password, siteid: this.siteid, rank: "doctor"}
-    
+    //this.loginService.addUser(login1);
 let obj = {username: this.username, password: this.password, siteid: this.siteid} ;
   this.loginService.login(obj)
     .subscribe((response)=>{
@@ -48,7 +48,7 @@ let obj = {username: this.username, password: this.password, siteid: this.siteid
 
     //this.loginService.getUser(this.username, this.password,this.siteid).subscribe(data =>{this.router.navigateByUrl('/dashboard');});
    
-    //this.loginService.addUser(login1);
+    
 
    
   })

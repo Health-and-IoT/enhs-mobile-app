@@ -8,7 +8,7 @@ import { Storage } from '@ionic/storage';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 export interface Form{
-    Ailment: string[];
+    Symptoms: string[];
     Pain: string;
     Priority: string;
     DateSubmitted: string;
@@ -18,6 +18,8 @@ export interface Form{
     DocID: string;
     ProgList: string;
     FinProg: string;
+    SiteID: string;
+    Email: string;
 }
 @Injectable({
     providedIn: 'root'
@@ -44,20 +46,20 @@ export class AilmentService{
         return this.users;
     }
 
-    getForms() : Observable<any> {
-       
+    getForms(id) : Observable<any> {
+       console.log(id)
     const header = new HttpHeaders({
         'Content-Type': 'application/json',
          Accept: 'application/json',
          'Access-Control-Allow-Origin': '*',
        
-         //api token (if need)
+        
   });    
   const options = {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getPatients", options).pipe(map((response: any) => response));
+  return this.http.post("http://localhost:8080/getPatients/" + id , options).pipe(map((response: any) => response));
 }
 
 getPatient(row : any) : Observable<any> {
