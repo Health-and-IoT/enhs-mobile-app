@@ -156,7 +156,22 @@ getSite(id: any) : Observable<any> {
   
   return this.http.post("http://localhost:8080/getSite/" + id, options).pipe(map((response: any) => response));
 }
-   
+  
+getAllEvents() : Observable<any> {
+       
+  const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+       Accept: 'application/json',
+       'Access-Control-Allow-Origin': '*',
+     
+       //api token (if need)
+});    
+const options = {
+  headers: header
+}
+
+return this.http.post("http://localhost:8080/getAllEvents", options).pipe(map((response: any) => response));
+}
     
     updateUser(id:string, form:Form){
         

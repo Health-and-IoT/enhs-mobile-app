@@ -10,37 +10,30 @@
 <ion-content [fullscreen]="true">
     <h1>Please Select a date</h1>
     <ion-item>
-      <ion-label>DD MM YY From</ion-label>
-      <ion-datetime displayFormat="DD MM YY" placeholder="Select Date" size="large"></ion-datetime>
+        <ion-label>DD MM YY From</ion-label>
+        <ion-datetime displayFormat="DD MM YY" placeholder="Select Date" [(ngModel)]="startDate" size="large"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>DD MM YY To</ion-label>
-      <ion-datetime displayFormat="DD MM YY" placeholder="Select Date" size="large"></ion-datetime>
+        <ion-label>DD MM YY To</ion-label>
+        <ion-datetime displayFormat="DD MM YY" placeholder="Select Date" [(ngModel)]="endDate" size="large"></ion-datetime>
     </ion-item>
-    <ion-button class="btn" expand="block" shape="round">Search</ion-button>
+    <ion-button class="btn" expand="block" shape="round" (click)="searchDate()">Search</ion-button>
+    <div *ngFor="let i of events">
+        <ion-card>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{Name of event -- diabetes}}</ion-card-title>
-        <ion-card-title>{{Location -- 123 redrum street glasgow}}</ion-card-title>
-        <ion-card-title>{{Date and time of event -- 11 sep 2017}}</ion-card-title>
-      </ion-card-header>
-        <ion-card-content>
-      
-          {{Details of events -- this event will be delivered by DR Graeme Hill a speciliast in diabetes field his
-          powerpoint slide will be a detailed outline of what excactly diabetes is.}}
-        </ion-card-content>
-    
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Name of event -- drugs and the effects</ion-card-title>
-        <ion-card-title>Location -- 23 open road motherwell</ion-card-title>
-        <ion-card-title>Date and time of event -- 2 march 2020</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Details of events -- this event will be delivered by Dr owen murphy a specialist in drug rehabiltion and
-        how to over come the side of effects drug use.
-      </ion-card-content>
-    </ion-card>
+            <ion-card-header>
+                <ion-card-title>{{i.name}}</ion-card-title>
+                <ion-card-title>{{i.location}}</ion-card-title>
+                <ion-card-title>{{i.date}} @ {{i.time}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+
+                {{i.desc}}
+            </ion-card-content>
+
+        </ion-card>
+
+    </div>
+
+
 </ion-content>
