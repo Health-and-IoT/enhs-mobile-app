@@ -40,6 +40,7 @@ donor: boolean;
 approved: boolean;
 sitename: string;
 siteAdd: string; 
+sitecode: string;
 
 
 forms: Form[];
@@ -100,11 +101,19 @@ forms: Form[];
       this.forms = res;
     })
    
-    this.ailmentService.getSite("111").subscribe(res =>{
+   
+    
+  }
+  scanQrCode(){
+    this.sitecode = "111"
+  }
+  
+  firstBut(slides){
+    slides.slideNext();
+    this.ailmentService.getSite(this.sitecode).subscribe(res =>{
       this.sitename = res.name
       this.siteAdd = res.address
     })
-    
   }
   backSlide(slides) {
     slides.slidePrev();
