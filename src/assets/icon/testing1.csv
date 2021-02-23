@@ -1,0 +1,15 @@
+﻿Healthboard,Week,Patients Seen,Patients Admitted,Medical emergencies,Ambulance deliveries,Common Ailment,Average waiting time
+Ayrshire and Arran,5,700,300,125,250,flu,2hr 30 min
+Borders,5,475,125,50,100,flu,3 hr
+Dumfries & Galloway,5,350,100,100,50,flu,2 hr
+Fife,5,450,125,150,60,cold,2 hr 30 mins
+Forth Valley,5,500,150,100,70,flu,3 hr
+Grampian,5,800,250,200,100,flu,3 hr
+Greater Glasgow and Clyde,5,1100,600,165,200,drug misuse,4 hr 30 mins
+Highland,5,350,100,55,70,cold,2 hrs
+Lanarkshire,5,650,200,150,300,flu,3 hr 30 mins
+Lothian,5,750,450,100,75,flu,4 hr 30 mins
+Orkney,5,85,50,25,15,broken bones,3 hrs
+Shetland,5,100,75,20,5,heart attack,3 hrs
+Tayside,5,650,400,35,75,drug misuse,2 hr 45 mins
+Western Isles,5,125,50,15,5,shingles,2 hrs

@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { StatsPageRoutingModule } from './stats-routing.module';
 
 import { StatsPage } from './stats.page';
-
+import { HttpClientModule } from '@angular/common/http';
+import {PapaParseModule} from 'ngx-papaparse';
+ 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StatsPageRoutingModule
+    StatsPageRoutingModule,
+    HttpClientModule,
+    PapaParseModule
   ],
   declarations: [StatsPage]
 })

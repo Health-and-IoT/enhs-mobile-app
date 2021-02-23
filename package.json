@@ -33,6 +33,7 @@
     "crypto-js": "^4.0.0",
     "firebase": "^8.2.1",
     "ionic-selectable": "^4.7.1",
+    "ngx-papaparse": "^3.0.4",
     "qrcode": "^1.4.4",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

@@ -2,3 +2,25 @@ ion-menu-button {
     color: var(--ion-color-primary);
 }
 
+.data-col {
+    background: #f0f0f0;
+    margin-left: 200px;
+}
+ 
+.has-focus {
+    --background: #fdf696;
+}
+ 
+.data-table {
+    min-width: 800px;
+    margin-left: 100px;
+    margin-top: 75px;
+    margin-right: 45px;
+}
+
+h4{
+  margin-left: 140px;
+  margin-top: 30px;
+}
+
+

@@ -9,5 +9,16 @@
 
 <ion-content [fullscreen]="true">
 
+    <h4>Stats for the scottish healthbords A&E departments</h4>
+  <table border="1" class="data-table">
+    <tr>
+      <td *ngFor="let header of headerRow" text-center><b>{{ header }}</b></td>
+    </tr>
+    <tr *ngFor="let row of CsvData; let i = index">
+      <td *ngFor="let data of row; let j = index;" class="data-col ">
+        <ion-input type="text" [(ngModel)]="CsvData[i][j]"></ion-input>
+      </td>
+    </tr>
+  </table>
 
 </ion-content>
