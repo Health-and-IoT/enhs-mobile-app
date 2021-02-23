@@ -2,27 +2,34 @@ ion-menu-button {
     color: var(--ion-color-primary);
 }
 
-#container {
-    text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-#container strong {
+.id{
+    justify-content: end;
+    margin-top: 50px;
+    margin-left: 1150px;
+  }
+  
+  p{
     font-size: 20px;
-    line-height: 26px;
-}
-
-#container p {
-    font-size: 16px;
-    line-height: 22px;
-    color: #8c8c8c;
-    margin: 0;
-}
-
-#container a {
-    text-decoration: none;
-}
+    letter-spacing: 1px;
+    margin-left: 85px;
+    word-spacing: 5px;
+    margin-right: 70px;
+    margin-top: 50px;
+  }
+  h2{
+    margin-left: 85px;
+  }
+  
+  h3{
+    margin-left: 85px;
+  }
+  
+  .p1{
+    word-spacing: normal;
+    margin-left: 85px;
+    margin-top: 15px;
+  }
+  a{
+    margin-left: 85px;
+    font-size: 25px;
+  }
