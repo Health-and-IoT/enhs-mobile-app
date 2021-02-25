@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import * as CryptoJS from 'crypto-js';
+import { config } from '../../assets/config';
 import { Storage } from '@ionic/storage';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -20,13 +20,17 @@ export interface Form{
     FinProg: string;
     SiteID: string;
     Email: string;
+  
+ 
 }
 @Injectable({
     providedIn: 'root'
 })
 export class AilmentService{
+    private readonly URL = 'assets/config.json';
     private testCollection: AngularFirestoreCollection<Form>;
     private users: Observable<Form[]>;
+   
     foundUser: Form[];
     constructor(private db : AngularFirestore, private storage: Storage, private http: HttpClient){
         this.testCollection = db.collection<Form>('form');
@@ -42,6 +46,12 @@ export class AilmentService{
 
         
     }
+   ngOnInit(){
+    
+   }
+
+    
+
     getUsers(){
         return this.users;
     }
@@ -59,7 +69,7 @@ export class AilmentService{
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getPatients/" + id , options).pipe(map((response: any) => response));
+  return this.http.post("http://"+ config.ip +"/getPatients/" + id , options).pipe(map((response: any) => response));
 }
 
 getPatient(row : any) : Observable<any> {
@@ -75,7 +85,7 @@ getPatient(row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getPatient/" + row, options).pipe(map((response: any) => response));
+  return this.http.post("http://"+ config.ip +"/getPatient/" + row, options).pipe(map((response: any) => response));
 }
 
 getVisits(row : any) : Observable<any> {
@@ -91,7 +101,7 @@ getVisits(row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getVisits/" + row, options).pipe(map((response: any) =>response));
+  return this.http.post("http://"+ config.ip +"/getVisits/" + row, options).pipe(map((response: any) =>response));
 }
 
 getSymptoms() : Observable<any> {
@@ -107,7 +117,7 @@ const options = {
   headers: header
 }
 
-return this.http.get("http://localhost:8080/symptoms", options).pipe(map((response: any) =>response));
+return this.http.get("http://"+ config.ip +"/symptoms", options).pipe(map((response: any) =>response));
 }
 updateVisit(id: any, row : any) : Observable<any> {
        
@@ -122,7 +132,7 @@ updateVisit(id: any, row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/updateForm/" + id, row, options).pipe(map((response: any) => response));
+  return this.http.post("http://"+ config.ip +"/updateForm/" + id, row, options).pipe(map((response: any) => response));
 }
 
 deleteForm(id: any) : Observable<any> {
@@ -138,7 +148,7 @@ deleteForm(id: any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/deleteForm/" + id, options).pipe(map((response: any) => response));
+  return this.http.post("http://"+ config.ip +"/deleteForm/" + id, options).pipe(map((response: any) => response));
 }
 
 getSite(id: any) : Observable<any> {
@@ -154,7 +164,7 @@ getSite(id: any) : Observable<any> {
     headers: header
   }
   
-  return this.http.post("http://localhost:8080/getSite/" + id, options).pipe(map((response: any) => response));
+  return this.http.post("http://"+ config.ip +"/getSite/" + id, options).pipe(map((response: any) => response));
 }
   
 getAllEvents() : Observable<any> {
@@ -170,7 +180,7 @@ const options = {
   headers: header
 }
 
-return this.http.post("http://localhost:8080/getAllEvents", options).pipe(map((response: any) => response));
+return this.http.post("http://"+ config.ip +"/getAllEvents", options).pipe(map((response: any) => response));
 }
     
     updateUser(id:string, form:Form){

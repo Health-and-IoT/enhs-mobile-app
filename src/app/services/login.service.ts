@@ -4,6 +4,7 @@ import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
+import { config } from '../../assets/config';
 import { Storage } from '@ionic/storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 export interface User{
@@ -59,7 +60,7 @@ export class LoginService{
         headers: header
       }
       
-      return this.http.post("http://localhost:8080/login/", obj, options).pipe(map((response: any) => response));
+      return this.http.post("http://"+ config.ip +"/login/", obj, options).pipe(map((response: any) => response));
     }
 
     getUser(id) : Observable<any> {
@@ -75,7 +76,7 @@ export class LoginService{
         headers: header
       }
       
-      return this.http.post("http://localhost:8080/getUser/"+id, options).pipe(map((response: any) => response));
+      return this.http.post("http://"+ config.ip +"/getUser/"+id, options).pipe(map((response: any) => response));
     }
     
     updateUser(user:User, id:string){

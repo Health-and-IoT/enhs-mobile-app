@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Patient, PatientService } from '../services/patient.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IonicSelectableComponent } from 'ionic-selectable';
+import { config } from '../../assets/config';
 
 class Port {
   public id: number;
@@ -216,7 +217,7 @@ let obj = {
   patient,
   form}
   ;
-let response = this.http.post("http://localhost:8080/", obj, options);
+let response = this.http.post("http://"+ config.ip +"/", obj, options);
    response.toPromise().then(data => {
      console.log('response: ', data);
      //TODO: handle HTTP errors
