@@ -30,3 +30,7 @@ ion-menu-button {
 #container a {
     text-decoration: none;
 }
+
+:host ::ng-deep .ngx-datatable .datatable-body .datatable-scroll {
+    display: inherit;
+}

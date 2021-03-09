@@ -115,9 +115,12 @@
 
                     <ion-label slot="end">10 (worst pain possible) </ion-label>
                 </ion-range>
-                <ion-label position="center">{{knobValues}}</ion-label>
-                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-                <ion-button color="success" (click)="gatherInfo()" style="" [disabled]="!knobValues">Submit</ion-button>
+                <ion-label>{{knobValues}}</ion-label>
+                <div>
+                    <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
+                    <ion-button color="success" (click)="gatherInfo()" style="" [disabled]="!knobValues">Submit</ion-button>
+                </div>
+
             </div>
         </ion-slide>
 

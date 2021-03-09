@@ -21,7 +21,7 @@ export class DashboardPage implements OnInit {
   public rows: any;
   private loggedIn : boolean;
   private rank;
-
+  public devWidth = this.platform.width();
   mobile: boolean;
   isEditable = {};
   
@@ -68,7 +68,16 @@ export class DashboardPage implements OnInit {
     
   }
 
-  
+  checkDevWidth(){
+
+    if(this.devWidth > 800 ){
+      return true;
+    }else{
+      return false;
+    }
+
+
+  }
 
   // Save row
   save(row, rowIndex){

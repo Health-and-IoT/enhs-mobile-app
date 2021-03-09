@@ -14,211 +14,288 @@
         </ion-toolbar>
     </ion-header>
 
-    <div style="display: inline-block">
+    <div *ngIf="checkDevWidth()">
+        <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+            <ion-slide style="width:20%; height: 500px; ">
+
+                <ion-card style="height:75%;width:200px;" button="true" (click)="changePage('common-ailment')">
+                    <img src="../assets/help.jpg" />
+                    <ion-card-header>
+
+                        <ion-card-title>Common Ailment</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        Check out the Common Ailments section showing over 800 known ailments, symptoms and methods of providing care to these ailments! Click here to access the Common Ailments section!
+
+                    </ion-card-content>
+                </ion-card>
+
+            </ion-slide>
+            <ion-slide style="width:20%; height: 500px; ">
+                <ion-card button="true" style="height:75%;width:200px;" (click)="changePage('stats')">
+                    <img src="../assets/graph.jpg" />
+                    <ion-card-header>
+
+                        <ion-card-title>Stats</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        All statistics can be viewed here! Showing common illnesses and trends of illnesses within the UK. Click here to view stats!
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+            <ion-slide style="width:20%; height: 500px; ">
+
+                <ion-card style="height:75%;width:200px;" button="true" (click)="changePage('events')">
+                    <img src="../assets/events.jpg" />
+                    <ion-card-header>
+
+                        <ion-card-title>Events</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        View all NHS related events here! Click here to view!
+
+                    </ion-card-content>
+                </ion-card>
 
 
-        <ion-grid>
-            <ion-col size="12">
-                <ion-row>
-                    <ion-card *ngIf="checkStatus2()" style="width:20%;float:left;" button="true" href="/ailment-form">
-                        <img src="../assets/doctor.jpg" />
-                        <ion-card-header>
+            </ion-slide>
+            <ion-slide>
+                <ion-card *ngIf="checkStatus2()" style="height:75%;width:200px;" button="true" href="/ailment-form">
+                    <img src="../assets/doctor.jpg" />
+                    <ion-card-header>
 
-                            <ion-card-title>Ailment Form</ion-card-title>
-                        </ion-card-header>
+                        <ion-card-title>Ailment Form</ion-card-title>
+                    </ion-card-header>
 
-                        <ion-card-content class="ion-text-wrap">
-                            Click here to access the Ailment Form to allow for you to be assessed and provided assistance by your GP / A&E.
-                        </ion-card-content>
+                    <ion-card-content class="ion-text-wrap">
+                        Click here to access the Ailment Form to allow for you to be assessed and provided assistance by your GP / A&E.
+                    </ion-card-content>
 
-                    </ion-card>
-                    <ion-card style="width:20%;float:left;" button="true" (click)="changePage('common-ailment')">
-                        <img src="../assets/help.jpg" />
-                        <ion-card-header>
-
-                            <ion-card-title>Common Ailment</ion-card-title>
-                        </ion-card-header>
-
-                        <ion-card-content>
-                            Check out the Common Ailments section showing over 800 known ailments, symptoms and methods of providing care to these ailments! Click here to access the Common Ailments section!
-
-                        </ion-card-content>
-                    </ion-card>
-                    <ion-card style="width:20%;float:left;" button="true" (click)="changePage('stats')">
-                        <img src="../assets/graph.jpg" />
-                        <ion-card-header>
-
-                            <ion-card-title>Stats</ion-card-title>
-                        </ion-card-header>
-
-                        <ion-card-content>
-                            All statistics can be viewed here! Showing common illnesses and trends of illnesses within the UK. Click here to view stats!
-
-                        </ion-card-content>
-                    </ion-card>
-                    <ion-card style="width:20%;float:left;" button="true" (click)="changePage('events')">
-                        <img src="../assets/events.jpg" />
-                        <ion-card-header>
-
-                            <ion-card-title>Events</ion-card-title>
-                        </ion-card-header>
-
-                        <ion-card-content>
-                            View all NHS related events here! Click here to view!
-
-                        </ion-card-content>
-                    </ion-card>
-
-                </ion-row>
-            </ion-col>
-            <div *ngIf="checkStatus()">
-                <ion-toolbar>
-                    <ion-title size="large">Incoming Forms</ion-title>
-                    <ion-title size="small">
-                        <ion-icon name="square" style="color: #01af44;padding-right:0.5%;"></ion-icon>Seen
-                        <ion-icon name="square" style="color: #dd3d31;padding-right:0.5%;"></ion-icon>Unseen
-                    </ion-title>
-                </ion-toolbar>
-
-                <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]"
-                    [columns]="columns" [reorderable]="reorderable">
-                    <ngx-datatable-column [flexGrow]="0.5" [width]="50">
-                        <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-                            <!-- Pencil icon -->
-                            <ion-icon name="pencil" title="Modify" *ngIf="!this.isEditable[rowIndex]" (click)="this.isEditable[rowIndex]=!this.isEditable[rowIndex]"></ion-icon>
-
-
-                            <!-- Save/Delete icons -->
-                            <ion-icon name="save" *ngIf="this.isEditable[rowIndex]" title="Save" (click)="save(row, rowIndex);"></ion-icon>
-                            <ion-icon name="trash" *ngIf="this.isEditable[rowIndex]" title="Delete" (click)="delete(row,rowIndex)"></ion-icon>
-
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
-
-                    <ngx-datatable-column [flexGrow]="1.5" name="Symptoms" prop="symptoms">
-                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-
-                            <ion-button style="float:left;" color="primary" (click)="viewSymp(row)">
-                                View
-                            </ion-button>
-
-
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column [flexGrow]="1.5" name="Date" prop="DateSubmitted">
-                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-
-                            <ion-input value="dateSubmitted" [(ngModel)]="row.dateSubmitted" [disabled]="!isEditable[rowIndex]"></ion-input>
-
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column [flexGrow]="1.5" name="Patient" prop="patient">
-                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-
-                            <ion-input value="pain" [(ngModel)]="row.patient" [disabled]="!isEditable[rowIndex]"></ion-input>
-
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column [flexGrow]="1.5" name="Pain" prop="pain">
-                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-
-                            <ion-input value="pain" [(ngModel)]="row.pain" [disabled]="!isEditable[rowIndex]"></ion-input>
-
-                        </ng-template>
-                    </ngx-datatable-column>
-
-
-                    <ngx-datatable-column name="Priority" sortable="false">
-                        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-
-
-                            <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
-                                High
-                            </ion-button>
-                            <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
-                                Medium
-                            </ion-button>
-                            <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
-                                Low
-                            </ion-button>
-
-
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Actions" sortable="false" prop="Id">
-                        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-                            <div style="display: inline-block">
-                                <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
-                                    View
-                                </ion-button>
-                                <ion-button style="float:left;" color="danger" (click)="setPrior('high', row)">
-                                    High
-                                </ion-button>
-                                <ion-button style="float:left;" color="warning" (click)="setPrior('medium', row)">
-                                    Medium
-                                </ion-button>
-                                <ion-button style="float:left;" color="success" (click)="setPrior('low', row)">
-                                    Low
-                                </ion-button>
-                            </div>
-
-                        </ng-template>
-                    </ngx-datatable-column>
-                </ngx-datatable>
-
-                <ngx-datatable *ngIf="checkStaff()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns"
-                    [reorderable]="reorderable">
-                    <ngx-datatable-column name="Seen" prop="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
-                    <ngx-datatable-column *ngFor="let column of columns; 
-                    let i = index;" name="{{column.name}}" prop="{{column.prop}}">
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Priority" sortable="false">
-                        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-
-
-                            <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
-                                High
-                            </ion-button>
-                            <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
-                                Medium
-                            </ion-button>
-                            <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
-                                Low
-                            </ion-button>
-
-
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Actions" sortable="false" prop="Id">
-                        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-                            <div style="display: inline-block">
-                                <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
-                                    View
-                                </ion-button>
-                                <ion-button style="float:left;" color="danger" (click)="setType(false, row)">
-                                    Deny
-                                </ion-button>
-
-                                <ion-button style="float:left;" color="success" (click)="setType(true, row)">
-                                    Approve
-                                </ion-button>
-                            </div>
-
-                        </ng-template>
-                    </ngx-datatable-column>
-                </ngx-datatable>
-            </div>
-
-        </ion-grid>
-
-
-
-
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
     </div>
+    <div *ngIf="!checkDevWidth()">
+        <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+            <ion-slide style="width:50%; height: 500px; ">
+
+                <ion-card style="height:75%;width:200px;" button="true" (click)="changePage('common-ailment')">
+                    <img src="../assets/help.jpg" />
+                    <ion-card-header>
+
+                        <ion-card-title>Common Ailment</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        Check out the Common Ailments section showing over 800 known ailments, symptoms and methods of providing care to these ailments! Click here to access the Common Ailments section!
+
+                    </ion-card-content>
+                </ion-card>
+
+            </ion-slide>
+            <ion-slide style="width:50%; height: 500px; ">
+                <ion-card button="true" style="height:75%;width:200px;" (click)="changePage('stats')">
+                    <img src="../assets/graph.jpg" />
+                    <ion-card-header>
+
+                        <ion-card-title>Stats</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        All statistics can be viewed here! Showing common illnesses and trends of illnesses within the UK. Click here to view stats!
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+            <ion-slide style="width:50%; height: 500px; ">
+
+                <ion-card style="height:75%;width:200px;" button="true" (click)="changePage('events')">
+                    <img src="../assets/events.jpg" />
+                    <ion-card-header>
+
+                        <ion-card-title>Events</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        View all NHS related events here! Click here to view!
+
+                    </ion-card-content>
+                </ion-card>
+
+
+            </ion-slide>
+            <ion-slide style="width:50%; height: 500px; ">
+                <ion-card *ngIf="checkStatus2()" style="height:75%;width:200px;" button="true" href="/ailment-form">
+                    <img src="../assets/doctor.jpg" />
+                    <ion-card-header>
+
+                        <ion-card-title>Ailment Form</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content class="ion-text-wrap">
+                        Click here to access the Ailment Form to allow for you to be assessed and provided assistance by your GP / A&E.
+                    </ion-card-content>
+
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+
+
+
+    <div *ngIf="checkStatus()">
+        <ion-toolbar>
+            <ion-title size="large">Incoming Forms</ion-title>
+            <ion-title size="small">
+                <ion-icon name="square" style="color: #01af44;padding-right:0.5%;"></ion-icon>Seen
+                <ion-icon name="square" style="color: #dd3d31;padding-right:0.5%;"></ion-icon>Unseen
+            </ion-title>
+        </ion-toolbar>
+
+        <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]"
+            [columns]="columns" [reorderable]="reorderable">
+            <ngx-datatable-column [flexGrow]="0.5" [width]="50">
+                <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    <!-- Pencil icon -->
+                    <ion-icon name="pencil" title="Modify" *ngIf="!this.isEditable[rowIndex]" (click)="this.isEditable[rowIndex]=!this.isEditable[rowIndex]"></ion-icon>
+
+
+                    <!-- Save/Delete icons -->
+                    <ion-icon name="save" *ngIf="this.isEditable[rowIndex]" title="Save" (click)="save(row, rowIndex);"></ion-icon>
+                    <ion-icon name="trash" *ngIf="this.isEditable[rowIndex]" title="Delete" (click)="delete(row,rowIndex)"></ion-icon>
+
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
+
+            <ngx-datatable-column [flexGrow]="1.5" name="Symptoms" prop="symptoms">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                    <ion-button style="float:left;" color="primary" (click)="viewSymp(row)">
+                        View
+                    </ion-button>
+
+
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1.5" name="Date" prop="DateSubmitted">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                    <ion-input value="dateSubmitted" [(ngModel)]="row.dateSubmitted" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1.5" name="Patient" prop="patient">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                    <ion-input value="pain" [(ngModel)]="row.patient" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1.5" name="Pain" prop="pain">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                    <ion-input value="pain" [(ngModel)]="row.pain" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                </ng-template>
+            </ngx-datatable-column>
+
+
+            <ngx-datatable-column name="Priority" sortable="false">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+
+
+                    <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
+                        High
+                    </ion-button>
+                    <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
+                        Medium
+                    </ion-button>
+                    <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
+                        Low
+                    </ion-button>
+
+
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Actions" sortable="false" prop="Id">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    <div style="display: inline-block">
+                        <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
+                            View
+                        </ion-button>
+                        <ion-button style="float:left;" color="danger" (click)="setPrior('high', row)">
+                            High
+                        </ion-button>
+                        <ion-button style="float:left;" color="warning" (click)="setPrior('medium', row)">
+                            Medium
+                        </ion-button>
+                        <ion-button style="float:left;" color="success" (click)="setPrior('low', row)">
+                            Low
+                        </ion-button>
+                    </div>
+
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+
+        <ngx-datatable *ngIf="checkStaff()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns"
+            [reorderable]="reorderable">
+            <ngx-datatable-column name="Seen" prop="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
+            <ngx-datatable-column *ngFor="let column of columns; 
+                    let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Priority" sortable="false">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+
+
+                    <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
+                        High
+                    </ion-button>
+                    <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
+                        Medium
+                    </ion-button>
+                    <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
+                        Low
+                    </ion-button>
+
+
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Actions" sortable="false" prop="Id">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    <div style="display: inline-block">
+                        <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
+                            View
+                        </ion-button>
+                        <ion-button style="float:left;" color="danger" (click)="setType(false, row)">
+                            Deny
+                        </ion-button>
+
+                        <ion-button style="float:left;" color="success" (click)="setType(true, row)">
+                            Approve
+                        </ion-button>
+                    </div>
+
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+
+
+
+
+
+
+
 
 </ion-content>
