@@ -15,97 +15,110 @@
     </ion-header>
 
 
-    <ion-slides pager="true" [options]="{allowTouchMove:false}" #slides>
-        <ion-slide style="display:block;padding:250px;">
-            <ion-button color="success" (click)="scanQrCode()">Scan QR Code</ion-button>
-            <ion-item>
-                <ion-label position="floating">Scan or enter site code</ion-label>
-
-                <ion-input [(ngModel)]="sitecode"></ion-input>
-
-
-
-
-            </ion-item>
-
-
-
-
-            <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-            <ion-button color="primary" (click)="firstBut(slides)" [disabled]="!sitecode">Next</ion-button>
-
-
-        </ion-slide>
-        <ion-slide style="display:block;padding:250px;">
-
-
-            <ion-label position="floating">{{sitename}} - </ion-label>
-            <ion-label position="floating">{{siteAdd}}</ion-label>
-            <ion-item>
-                <ion-label position="floating">Name</ion-label>
-                <ion-input [(ngModel)]="name" required></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Date Of Birth</ion-label>
-                <ion-datetime displayFormat="MM DD YYYY" placeholder="Select Date" [(ngModel)]="dob"></ion-datetime>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Next of Kin</ion-label>
-                <ion-input [(ngModel)]="nok"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Email</ion-label>
-                <ion-input [(ngModel)]="email" required></ion-input>
-            </ion-item>
-            <ion-button color="primary" (click)="nextSlide(slides)" [disabled]="!name || !dob || !nok  || !email">Next</ion-button>
-        </ion-slide>
-        <ion-slide style="display:block;padding:250px;">
-            <ion-item>
-                <ion-label position="floating">Address</ion-label>
-                <ion-input [(ngModel)]="address"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">CHI Number</ion-label>
-                <ion-input [(ngModel)]="chinumber"></ion-input>
-            </ion-item>
-            <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-            <ion-button color="primary" (click)="nextSlide(slides)" style="margin-left:2%" [disabled]="!address">Next</ion-button>
-        </ion-slide>
-        <ion-slide style="display:block;padding:250px;">
-            <ion-item>
-                <ion-label position="floating">Symptoms</ion-label>
+    <ion-slides pager="true" [options]="{allowTouchMove:false}" style="height:100vh;" #slides slidesPerView="1">
+        <ion-slide>
+            <div style="display:block">
+                <ion-button color="success" (click)="scanQrCode()">Scan QR Code</ion-button>
                 <ion-item>
-                    <ion-label>Symptoms</ion-label>
-                    <ionic-selectable [(ngModel)]="s" [items]="ports" itemValueField="id" [isMultiple]="true" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)">
-                    </ionic-selectable>
+                    <ion-label position="floating">Scan or enter site code</ion-label>
+
+                    <ion-input [(ngModel)]="sitecode"></ion-input>
+
+
+
+
                 </ion-item>
-                <!-- <ion-searchbar style="padding-top:30px; " howCancelButton="focus " [(ngModel)]="illness " type="text " debounce="500 " (ionChange)="getItems($event) "></ion-searchbar>
+
+
+
+
+                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
+                <ion-button color="primary" (click)="firstBut(slides)" [disabled]="!sitecode">Next</ion-button>
+            </div>
+
+
+
+
+
+        </ion-slide>
+        <ion-slide>
+
+            <div style="display:block">
+                <ion-label position="floating">{{sitename}} - </ion-label>
+                <ion-label position="floating">{{siteAdd}}</ion-label>
+                <ion-item>
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-input [(ngModel)]="name" required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Date Of Birth</ion-label>
+                    <ion-datetime displayFormat="MM DD YYYY" placeholder="Select Date" [(ngModel)]="dob"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Next of Kin</ion-label>
+                    <ion-input [(ngModel)]="nok"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input [(ngModel)]="email" required></ion-input>
+                </ion-item>
+                <ion-button color="primary" (click)="nextSlide(slides)" [disabled]="!name || !dob || !nok  || !email">Next</ion-button>
+
+            </div>
+        </ion-slide>
+
+
+        <ion-slide>
+            <div style="display:block">
+                <ion-item>
+                    <ion-label position="floating">Address</ion-label>
+                    <ion-input [(ngModel)]="address"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">CHI Number</ion-label>
+                    <ion-input [(ngModel)]="chinumber"></ion-input>
+                </ion-item>
+                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
+                <ion-button color="primary" (click)="nextSlide(slides)" style="" [disabled]="!address">Next</ion-button>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div style="display:block">
+                <ion-item>
+                    <ion-label position="floating">Symptoms</ion-label>
+                    <ion-item>
+                        <ion-label>Symptoms</ion-label>
+                        <ionic-selectable [(ngModel)]="s" [items]="ports" itemValueField="id" [isMultiple]="true" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)">
+                        </ionic-selectable>
+                    </ion-item>
+                    <!-- <ion-searchbar style="padding-top:30px; " howCancelButton="focus " [(ngModel)]="illness " type="text " debounce="500 " (ionChange)="getItems($event) "></ion-searchbar>
 
                 <ion-list *ngIf="isItemAvailable ">
                     <ion-item *ngFor="let item of items " (click)="test(item) ">{{ item }}</ion-item>
                 </ion-list> -->
 
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Allergies</ion-label>
-                <ion-input [(ngModel)]="allergies"></ion-input>
-            </ion-item>
-            <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-            <ion-button color="primary" (click)="nextSlide(slides)" style="margin-left:2%" [disabled]="!s">Next</ion-button>
-
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Allergies</ion-label>
+                    <ion-input [(ngModel)]="allergies"></ion-input>
+                </ion-item>
+                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
+                <ion-button color="primary" (click)="nextSlide(slides)" style="" [disabled]="!s">Next</ion-button>
+            </div>
         </ion-slide>
-        <ion-slide style="display:block;padding:250px;">
+        <ion-slide>
+            <div style="display:block">
+                <img src="../assets/scale.png " style="" />
 
-            <img src="../assets/scale.png " style="width:600px;height:600px;" />
+                <ion-range dualKnobs="false" min="0" max="10" step="1" snaps="true" id="painScale" [(ngModel)]="knobValues">
+                    <ion-label slot="start">0 (no pain) </ion-label>
 
-            <ion-range dualKnobs="false" min="0" max="10" step="1" snaps="true" id="painScale" [(ngModel)]="knobValues">
-                <ion-label slot="start">0 (no pain) </ion-label>
-
-                <ion-label slot="end">10 (worst pain possible) </ion-label>
-            </ion-range>
-            <ion-label position="center">{{knobValues}}</ion-label>
-            <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-            <ion-button color="success" (click)="gatherInfo()" style="margin-left:2%" [disabled]="!knobValues">Submit</ion-button>
+                    <ion-label slot="end">10 (worst pain possible) </ion-label>
+                </ion-range>
+                <ion-label position="center">{{knobValues}}</ion-label>
+                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
+                <ion-button color="success" (click)="gatherInfo()" style="" [disabled]="!knobValues">Submit</ion-button>
+            </div>
         </ion-slide>
 
     </ion-slides>
