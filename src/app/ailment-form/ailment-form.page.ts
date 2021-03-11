@@ -12,6 +12,7 @@ import { config } from '../../assets/config';
 class Port {
   public id: number;
   public name: string;
+  public prettyName: string;
 }
 
 @Component({
@@ -99,7 +100,7 @@ forms: Form[];
    .subscribe((response)=>{
       
       this.ports = response;
-      console.log(this.ports[0].name)
+      console.log(this.ports[0].prettyName)
       this.ports.sort(function(a, b) {
        var textA = a.name.toUpperCase();
        var textB = b.name.toUpperCase();

@@ -88,7 +88,7 @@
                     <ion-label position="floating">Symptoms</ion-label>
                     <ion-item>
                         <ion-label>Symptoms</ion-label>
-                        <ionic-selectable [(ngModel)]="s" [items]="ports" itemValueField="id" [isMultiple]="true" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)">
+                        <ionic-selectable [(ngModel)]="s" [items]="ports" itemValueField="id" [isMultiple]="true" itemTextField="prettyName" [canSearch]="true" (onChange)="portChange($event)">
                         </ionic-selectable>
                     </ion-item>
                     <!-- <ion-searchbar style="padding-top:30px; " howCancelButton="focus " [(ngModel)]="illness " type="text " debounce="500 " (ionChange)="getItems($event) "></ion-searchbar>
