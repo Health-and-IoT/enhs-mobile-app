@@ -37,7 +37,7 @@ export class DashboardPage implements OnInit {
          this.ailmentService.getForms(response.siteid)
     .subscribe((response)=>{
         this.rows = response;
-        console.log(this.rows); //<-- not undefined anymore
+        //console.log(this.rows); //<-- not undefined anymore
     });
     
       this.columns = [
@@ -82,22 +82,22 @@ export class DashboardPage implements OnInit {
   // Save row
   save(row, rowIndex){
     this.isEditable[rowIndex]=!this.isEditable[rowIndex]
-    console.log("Row saved: "+ rowIndex);
+    //console.log("Row saved: "+ rowIndex);
     this.ailmentService.updateVisit(row.docId, row)
     .subscribe((response)=>{
        
-        console.log(response); //<-- not undefined anymore
+         //<-- not undefined anymore
     });
   }
 
   // Delete row
   delete(row :any , rowIndex){
     this.isEditable[rowIndex]=!this.isEditable[rowIndex]
-    console.log(row.docID);
+    //console.log(row.docID);
     this.ailmentService.deleteForm(row.docID)
     .subscribe((response)=>{
        
-        console.log(response); //<-- not undefined anymore
+         //<-- not undefined anymore
     });
   }
 
@@ -122,19 +122,19 @@ export class DashboardPage implements OnInit {
     this.ailmentService.updateVisit(row.docId, row)
     .subscribe((response)=>{
        
-        console.log(response); //<-- not undefined anymore
+        //console.log(response); //<-- not undefined anymore
     });
   }
 
   setType(level, row){
-    console.log("x")
+    //console.log("x")
     row.approved = level
     
-    console.log(row)
+    //console.log(row)
     this.ailmentService.updateVisit(row.docId, row)
     .subscribe((response)=>{
        
-        console.log(response); //<-- not undefined anymore
+        //console.log(response); //<-- not undefined anymore
     });
     
   }
