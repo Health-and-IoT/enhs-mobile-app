@@ -28,7 +28,7 @@ export class DashboardPage implements OnInit {
   constructor(public platform: Platform, private route: ActivatedRoute, private ailmentService: AilmentService,private loginService: LoginService, private storage: Storage, public modalController: ModalController, private router: Router, private http: HttpClient) { 
    
     storage.get('loggedIn').then((val) => { this.loggedIn = val}),
-    
+   
     storage.get('userID').then((val) => {  this.loginService.getUser(val)
       .subscribe((response)=>{
         

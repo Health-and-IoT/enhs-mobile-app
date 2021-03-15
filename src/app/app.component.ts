@@ -100,6 +100,7 @@ rank: String;
 
   async logout(){
     this.storage.set('loggedIn', false);
+    this.storage.set('userID', "r61vnVKiqFXngU951c5f");
     //this.storage.set('userID', null);
     const alert = await this.alertController.create({
       header: 'Logged out!',
@@ -149,10 +150,11 @@ rank: String;
       
     }
     this.storage.get('loggedIn').then((val) => {
-      console.log('User logged in? : ', val);
+      //console.log('User logged in? : ', val);
       if (val){
         this.loggedIn = true;
         this.storage.get('userID').then((val1) => { 
+         
           this.loginService.getUserById(val1).subscribe(res =>{
             this.user = res;
             this.username = res.username;
