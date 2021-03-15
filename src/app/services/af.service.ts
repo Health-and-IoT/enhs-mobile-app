@@ -57,7 +57,7 @@ export class AilmentService{
     }
 
     getForms(id) : Observable<any> {
-       console.log(id)
+       
     const header = new HttpHeaders({
         'Content-Type': 'application/json',
          Accept: 'application/json',

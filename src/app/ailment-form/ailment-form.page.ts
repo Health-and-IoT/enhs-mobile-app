@@ -75,8 +75,8 @@ forms: Form[];
   }) {
     
     this.s.push(event.value)
-    console.log(this.s[0])
-    console.log(this.s[1])
+    //console.log(this.s[0])
+    //console.log(this.s[1])
   }
   formatDate(date) {
     var d = new Date(date),
@@ -100,7 +100,7 @@ forms: Form[];
    .subscribe((response)=>{
       
       this.ports = response;
-      console.log(this.ports[0].prettyName)
+      //console.log(this.ports[0].prettyName)
       this.ports.sort(function(a, b) {
        var textA = a.name.toUpperCase();
        var textB = b.name.toUpperCase();
@@ -154,7 +154,7 @@ forms: Form[];
      
 
        this.illness = item
-       console.log(item)
+       //console.log(item)
      }
 
      getItems(ev: any) {
@@ -190,7 +190,7 @@ forms: Form[];
   
   gatherInfo() {
     
-    console.log(this.symptoms)
+    //console.log(this.symptoms)
     var i;
      for (i = 0; i < this.s.length; i++) {
        if(this.s[i].name == undefined){
@@ -220,10 +220,10 @@ let obj = {
   ;
 let response = this.http.post("http://"+ config.ip +"/", obj, options);
    response.toPromise().then(data => {
-     console.log('response: ', data);
+     //console.log('response: ', data);
      //TODO: handle HTTP errors
    }).catch((err) =>{
-      console.log('error', err);
+      //console.log('error', err);
    });
     //this.ailmentService.addUser(form);
     this.completedForm();
