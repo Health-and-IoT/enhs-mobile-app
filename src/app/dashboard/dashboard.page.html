@@ -147,149 +147,151 @@
 
 
 
+    <div *ngIf="checkDevWidth()">
+        <div *ngIf="checkStatus()">
+            <ion-toolbar>
+                <ion-title size="large">Incoming Forms</ion-title>
+                <ion-title size="small">
+                    <ion-icon name="square" style="color: #01af44;padding-right:0.5%;"></ion-icon>Seen
+                    <ion-icon name="square" style="color: #dd3d31;padding-right:0.5%;"></ion-icon>Unseen
+                </ion-title>
+            </ion-toolbar>
 
-    <div *ngIf="checkStatus()">
-        <ion-toolbar>
-            <ion-title size="large">Incoming Forms</ion-title>
-            <ion-title size="small">
-                <ion-icon name="square" style="color: #01af44;padding-right:0.5%;"></ion-icon>Seen
-                <ion-icon name="square" style="color: #dd3d31;padding-right:0.5%;"></ion-icon>Unseen
-            </ion-title>
-        </ion-toolbar>
-
-        <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]"
-            [columns]="columns" [reorderable]="reorderable">
-            <ngx-datatable-column [flexGrow]="0.5" [width]="50">
-                <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-                    <!-- Pencil icon -->
-                    <ion-icon name="pencil" title="Modify" *ngIf="!this.isEditable[rowIndex]" (click)="this.isEditable[rowIndex]=!this.isEditable[rowIndex]"></ion-icon>
-
-
-                    <!-- Save/Delete icons -->
-                    <ion-icon name="save" *ngIf="this.isEditable[rowIndex]" title="Save" (click)="save(row, rowIndex);"></ion-icon>
-                    <ion-icon name="trash" *ngIf="this.isEditable[rowIndex]" title="Delete" (click)="delete(row,rowIndex)"></ion-icon>
-
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
-
-            <ngx-datatable-column [flexGrow]="1.5" name="Symptoms" prop="symptoms">
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-
-                    <ion-button style="float:left;" color="primary" (click)="viewSymp(row)">
-                        View
-                    </ion-button>
+            <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]"
+                [columns]="columns" [reorderable]="reorderable">
+                <ngx-datatable-column [flexGrow]="0.5" [width]="50">
+                    <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                        <!-- Pencil icon -->
+                        <ion-icon name="pencil" title="Modify" *ngIf="!this.isEditable[rowIndex]" (click)="this.isEditable[rowIndex]=!this.isEditable[rowIndex]"></ion-icon>
 
 
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column [flexGrow]="1.5" name="Date" prop="DateSubmitted">
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        <!-- Save/Delete icons -->
+                        <ion-icon name="save" *ngIf="this.isEditable[rowIndex]" title="Save" (click)="save(row, rowIndex);"></ion-icon>
+                        <ion-icon name="trash" *ngIf="this.isEditable[rowIndex]" title="Delete" (click)="delete(row,rowIndex)"></ion-icon>
 
-                    <ion-input value="dateSubmitted" [(ngModel)]="row.dateSubmitted" [disabled]="!isEditable[rowIndex]"></ion-input>
+                    </ng-template>
+                </ngx-datatable-column>
 
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column [flexGrow]="1.5" name="Patient" prop="patient">
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <ngx-datatable-column name="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
 
-                    <ion-input value="pain" [(ngModel)]="row.patient" [disabled]="!isEditable[rowIndex]"></ion-input>
+                <ngx-datatable-column [flexGrow]="1.5" name="Symptoms" prop="symptoms">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column [flexGrow]="1.5" name="Pain" prop="pain">
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-
-                    <ion-input value="pain" [(ngModel)]="row.pain" [disabled]="!isEditable[rowIndex]"></ion-input>
-
-                </ng-template>
-            </ngx-datatable-column>
-
-
-            <ngx-datatable-column name="Priority" sortable="false">
-                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-
-
-                    <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
-                        High
-                    </ion-button>
-                    <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
-                        Medium
-                    </ion-button>
-                    <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
-                        Low
-                    </ion-button>
-
-
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Actions" sortable="false" prop="Id">
-                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-                    <div style="display: inline-block">
-                        <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
+                        <ion-button style="float:left;" color="primary" (click)="viewSymp(row)">
                             View
                         </ion-button>
-                        <ion-button style="float:left;" color="danger" (click)="setPrior('high', row)">
+
+
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [flexGrow]="1.5" name="Date" prop="DateSubmitted">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                        <ion-input value="dateSubmitted" [(ngModel)]="row.dateSubmitted" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [flexGrow]="1.5" name="Patient" prop="patient">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                        <ion-input value="pain" [(ngModel)]="row.patient" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [flexGrow]="1.5" name="Pain" prop="pain">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                        <ion-input value="pain" [(ngModel)]="row.pain" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                    </ng-template>
+                </ngx-datatable-column>
+
+
+                <ngx-datatable-column name="Priority" sortable="false">
+                    <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+
+
+                        <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
                             High
                         </ion-button>
-                        <ion-button style="float:left;" color="warning" (click)="setPrior('medium', row)">
+                        <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
                             Medium
                         </ion-button>
-                        <ion-button style="float:left;" color="success" (click)="setPrior('low', row)">
+                        <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
                             Low
                         </ion-button>
-                    </div>
-
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-
-        <ngx-datatable *ngIf="checkStaff()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns"
-            [reorderable]="reorderable">
-            <ngx-datatable-column name="Seen" prop="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
-            <ngx-datatable-column *ngFor="let column of columns; 
-                    let i = index;" name="{{column.name}}" prop="{{column.prop}}">
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Priority" sortable="false">
-                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
 
 
-                    <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
-                        High
-                    </ion-button>
-                    <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
-                        Medium
-                    </ion-button>
-                    <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
-                        Low
-                    </ion-button>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Actions" sortable="false" prop="Id">
+                    <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                        <div style="display: inline-block">
+                            <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
+                                View
+                            </ion-button>
+                            <ion-button style="float:left;" color="danger" (click)="setPrior('high', row)">
+                                High
+                            </ion-button>
+                            <ion-button style="float:left;" color="warning" (click)="setPrior('medium', row)">
+                                Medium
+                            </ion-button>
+                            <ion-button style="float:left;" color="success" (click)="setPrior('low', row)">
+                                Low
+                            </ion-button>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+
+            <ngx-datatable *ngIf="checkStaff()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns"
+                [reorderable]="reorderable">
+                <ngx-datatable-column name="Seen" prop="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
+                <ngx-datatable-column *ngFor="let column of columns; 
+                        let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Priority" sortable="false">
+                    <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
 
 
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Actions" sortable="false" prop="Id">
-                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-                    <div style="display: inline-block">
-                        <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
-                            View
+                        <ion-button *ngIf="value === 'high'" style="float:left;" color="danger" (click)="onSelect(row)">
+                            High
                         </ion-button>
-                        <ion-button style="float:left;" color="danger" (click)="setType(false, row)">
-                            Deny
+                        <ion-button *ngIf="value === 'medium'" style="float:left;" color="warning" (click)="onSelect(row)">
+                            Medium
+                        </ion-button>
+                        <ion-button *ngIf="value === 'low'" style="float:left;" color="success" (click)="onSelect(row)">
+                            Low
                         </ion-button>
 
-                        <ion-button style="float:left;" color="success" (click)="setType(true, row)">
-                            Approve
-                        </ion-button>
-                    </div>
 
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Actions" sortable="false" prop="Id">
+                    <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                        <div style="display: inline-block">
+                            <ion-button style="float:left;" color="primary" (click)="viewForm(row)">
+                                View
+                            </ion-button>
+                            <ion-button style="float:left;" color="danger" (click)="setType(false, row)">
+                                Deny
+                            </ion-button>
+
+                            <ion-button style="float:left;" color="success" (click)="setType(true, row)">
+                                Approve
+                            </ion-button>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
     </div>
+
 
 
 
