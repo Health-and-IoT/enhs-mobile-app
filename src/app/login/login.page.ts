@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
 users: User[];
 username:string;
 password:string;
+private newPass: string;
 siteid:number;
   constructor(private storage: Storage, private http: HttpClient, private loginService: LoginService, private EncrDecr: EncrDecrService, private router: Router) {  
 
@@ -28,13 +29,14 @@ siteid:number;
   }
   
   login(){
-    this.password =  this.EncrDecr.set('123456$#@$^@1ERF', this.password);
+    this.newPass = this.password;
+    this.newPass =  this.EncrDecr.set('123456$#@$^@1ERF', this.newPass);
     var decrypted = this.EncrDecr.get('123456$#@$^@1ERF', this.password);
     //console.log(this.password);
     //console.log(decrypted);
     //let login1: User = {username: this.username, password:this.password, siteid: this.siteid, rank: "doctor"}
     //this.loginService.addUser(login1);
-let obj = {username: this.username, password: this.password, siteid: this.siteid} ;
+let obj = {username: this.username, password: this.newPass, siteid: this.siteid} ;
   this.loginService.login(obj)
     .subscribe((response)=>{
       console.log('response: ', response);
