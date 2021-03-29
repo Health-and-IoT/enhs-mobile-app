@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true">
     <h2>Text size</h2>
-    <ion-segment>
+    <ion-segment (ionChange)="segmentChanged($event)">
         <ion-segment-button value="Small">
             <ion-label>Small</ion-label>
         </ion-segment-button>
@@ -22,7 +22,7 @@
     </ion-segment>
 
     <h2>Text Contrast</h2>
-    <ion-segment>
+    <ion-segment (ionchange)="segmentChanged($event)">
         <ion-segment-button value="On">
             <ion-label>On</ion-label>
         </ion-segment-button>
@@ -31,7 +31,7 @@
         </ion-segment-button>
     </ion-segment>
     <h2>Notifications</h2>
-    <ion-segment>
+    <ion-segment (ionchange)="segmentChanged($event)">
         <ion-segment-button value="On">
             <ion-label>On</ion-label>
         </ion-segment-button>
@@ -40,8 +40,7 @@
         </ion-segment-button>
     </ion-segment>
     <h2>Text to speech</h2>
-    <!-- <ion-segment (ionchange)="segmentChanged($event)"> -->
-    <ion-segment>
+    <ion-segment (ionchange)="segmentChanged($event)">
         <ion-segment-button value="On">
             <ion-label>On</ion-label>
         </ion-segment-button>

@@ -67,10 +67,6 @@ export class DashboardPage implements OnInit {
     }
     
   }
-  onSelect(row) {
-   
-    
-  }
 
   checkDevWidth(){
 

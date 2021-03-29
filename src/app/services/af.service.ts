@@ -69,7 +69,7 @@ export class AilmentService{
     headers: header
   }
   
-  return this.http.get("http://"+ config.ip +"/getPatients/" + id , options).pipe(map((response: any) => response));
+  return this.http.post("http://"+ config.ip +"/getPatients/" + id , options).pipe(map((response: any) => response));
 }
 
 getPatient(row : any) : Observable<any> {
@@ -85,7 +85,7 @@ getPatient(row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.get("http://"+ config.ip +"/getPatient/" + row, options).pipe(map((response: any) => response));
+  return this.http.post("http://"+ config.ip +"/getPatient/" + row, options).pipe(map((response: any) => response));
 }
 
 getVisits(row : any) : Observable<any> {
@@ -101,7 +101,7 @@ getVisits(row : any) : Observable<any> {
     headers: header
   }
   
-  return this.http.get("http://"+ config.ip +"/getVisits/" + row, options).pipe(map((response: any) =>response));
+  return this.http.post("http://"+ config.ip +"/getVisits/" + row, options).pipe(map((response: any) =>response));
 }
 
 getSymptoms() : Observable<any> {
@@ -164,7 +164,7 @@ getSite(id: any) : Observable<any> {
     headers: header
   }
   
-  return this.http.get("http://"+ config.ip +"/getSite/" + id, options).pipe(map((response: any) => response));
+  return this.http.post("http://"+ config.ip +"/getSite/" + id, options).pipe(map((response: any) => response));
 }
   
 getAllEvents() : Observable<any> {
@@ -180,7 +180,7 @@ const options = {
   headers: header
 }
 
-return this.http.get("http://"+ config.ip +"/getAllEvents", options).pipe(map((response: any) => response));
+return this.http.post("http://"+ config.ip +"/getAllEvents", options).pipe(map((response: any) => response));
 }
     
     updateUser(id:string, form:Form){

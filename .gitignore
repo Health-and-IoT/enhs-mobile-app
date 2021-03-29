@@ -32,6 +32,3 @@ npm-debug.log*
 src/environments/environment.prod.ts
 src/environments/environment.ts
 
-.firebaserc
-firebase.json
-.firebase/hosting.d3d3.cache

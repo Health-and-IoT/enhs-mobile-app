@@ -60,7 +60,7 @@ export class LoginService{
         headers: header
       }
       
-      return this.http.get("http://"+ config.ip +"/login/"+ obj, options).pipe(map((response: any) => response));
+      return this.http.post("http://"+ config.ip +"/login/", obj, options).pipe(map((response: any) => response));
     }
 
     getUser(id) : Observable<any> {
@@ -76,7 +76,7 @@ export class LoginService{
         headers: header
       }
       
-      return this.http.get("http://"+ config.ip +"/getUser/"+id, options).pipe(map((response: any) => response));
+      return this.http.post("http://"+ config.ip +"/getUser/"+id, options).pipe(map((response: any) => response));
     }
     
     updateUser(user:User, id:string){

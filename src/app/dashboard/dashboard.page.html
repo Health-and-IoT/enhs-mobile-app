@@ -157,7 +157,8 @@
                 </ion-title>
             </ion-toolbar>
 
-            <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns">
+            <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]"
+                [columns]="columns" [reorderable]="reorderable">
                 <ngx-datatable-column [flexGrow]="0.5" [width]="50">
                     <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                         <!-- Pencil icon -->
@@ -245,7 +246,8 @@
                 </ngx-datatable-column>
             </ngx-datatable>
 
-            <ngx-datatable *ngIf="checkStaff()" [rows]="rows" [limit]="5" class="material" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns">
+            <ngx-datatable *ngIf="checkStaff()" [rows]="rows" [limit]="5" class="material" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns"
+                [reorderable]="reorderable">
                 <ngx-datatable-column name="Seen" prop="Seen" [cellClass]="rowClass" [width]="50"></ngx-datatable-column>
                 <ngx-datatable-column *ngFor="let column of columns; 
                         let i = index;" name="{{column.name}}" prop="{{column.prop}}">

@@ -40,8 +40,8 @@ export class OptionsPage implements OnInit {
 
 }
 
-// export class segmentChanged {
-//   segmentChanged(ev: any) {
-//     console.log('Segment changed', ev);
-//   }
-// }
+export class segmentChanged {
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
+  }
+}
