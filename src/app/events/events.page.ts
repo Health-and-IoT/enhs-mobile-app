@@ -11,7 +11,7 @@ export class EventsPage implements OnInit {
   startDate: any
   endDate: any
   constructor(private ailmentService: AilmentService) { this.ailmentService.getAllEvents()   
-    .subscribe((response)=>{
+    .then((response)=>{
       this.events = response
         console.log(response)
     });}

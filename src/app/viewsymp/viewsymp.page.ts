@@ -33,11 +33,11 @@ export class ViewsympPage implements OnInit {
   });
   console.log(this.symptoms)
     this.ailmentService.getVisits(this.form.patient)
-  .subscribe((response)=>{
+  .then((response)=>{
     
     this.visits = response
     this.ailmentService.getPatient(this.form.patient)
-  .subscribe((response)=>{
+  .then((response)=>{
     
     this.patient = response
     

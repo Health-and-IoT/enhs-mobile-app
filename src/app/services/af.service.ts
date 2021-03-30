@@ -56,143 +56,180 @@ export class AilmentService{
         return this.users;
     }
 
-    getForms(id) : Observable<any> {
+   async getForms(id) {
        
-    const header = new HttpHeaders({
-        'Content-Type': 'application/json',
-         Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-       
-        
-  });    
-  const options = {
-    headers: header
-  }
+      const response = await fetch("https://"+ config.ip +"/getPatients/"+id, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      
+      });
+      return response.json(); 
   
-  return this.http.post("http://"+ config.ip +"/getPatients/" + id , options).pipe(map((response: any) => response));
+
 }
 
-getPatient(row : any) : Observable<any> {
-       
-    const header = new HttpHeaders({
-        'Content-Type': 'application/json',
-         Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-       
-         //api token (if need)
-  });    
-  const options = {
-    headers: header
-  }
-  
-  return this.http.post("http://"+ config.ip +"/getPatient/" + row, options).pipe(map((response: any) => response));
-}
-
-getVisits(row : any) : Observable<any> {
-       
-    const header = new HttpHeaders({
-        'Content-Type': 'application/json',
-         Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-       
-         //api token (if need)
-  });    
-  const options = {
-    headers: header
-  }
-  
-  return this.http.post("http://"+ config.ip +"/getVisits/" + row, options).pipe(map((response: any) =>response));
-}
-
-getSymptoms() : Observable<any> {
-       
-  const header = new HttpHeaders({
-      'Content-Type': 'application/json',
-       Accept: 'application/json',
-       'Access-Control-Allow-Origin': '*',
+async getPatient(row : any)  {
      
-       //api token (if need)
-});    
-const options = {
-  headers: header
+  const response = await fetch("https://"+ config.ip +"/getPatient/"+row, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+   
+  });
+  return response.json(); 
+  
+ 
 }
 
-return this.http.get("http://"+ config.ip +"/symptoms", options).pipe(map((response: any) =>response));
-}
-updateVisit(id: any, row : any) : Observable<any> {
+async getVisits(row : any){
        
-    const header = new HttpHeaders({
-        'Content-Type': 'application/json',
-         Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-       
-         //api token (if need)
-  });    
-  const options = {
-    headers: header
-  }
+  const response = await fetch("https://"+ config.ip +"/getVisits/"+row, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(row) // body data type must match "Content-Type" header
+  });
+  return response.json(); 
   
-  return this.http.post("http://"+ config.ip +"/updateForm/" + id, row, options).pipe(map((response: any) => response));
+
 }
 
-deleteForm(id: any) : Observable<any> {
+async getSymptoms() {
        
-    const header = new HttpHeaders({
-        'Content-Type': 'application/json',
-         Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
+  const response = await fetch("https://"+ config.ip +"/symptoms", {
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+   
+  });
+  return response.json(); 
+
+
+}
+async updateVisit(id: any, row : any) {
        
-         //api token (if need)
-  });    
-  const options = {
-    headers: header
-  }
+  const response = await fetch("https://"+ config.ip +"/updateForm/" + id, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(row) // body data type must match "Content-Type" header
+  });
+  return response.json(); 
   
-  return this.http.post("http://"+ config.ip +"/deleteForm/" + id, options).pipe(map((response: any) => response));
+  
 }
 
-getSite(id: any) : Observable<any> {
+async deleteForm(id: any) {
        
-    const header = new HttpHeaders({
-        'Content-Type': 'application/json',
-         Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-       
-         //api token (if need)
-  });    
-  const options = {
-    headers: header
-  }
+  const response = await fetch("https://"+ config.ip +"/deleteForm/"+id, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
   
-  return this.http.post("http://"+ config.ip +"/getSite/" + id, options).pipe(map((response: any) => response));
-}
+  });
+  return response.json(); 
   
-getAllEvents() : Observable<any> {
-       
-  const header = new HttpHeaders({
-      'Content-Type': 'application/json',
-       Accept: 'application/json',
-       'Access-Control-Allow-Origin': '*',
-     
-       //api token (if need)
-});    
-const options = {
-  headers: header
+
 }
 
-return this.http.post("http://"+ config.ip +"/getAllEvents", options).pipe(map((response: any) => response));
+async submitForm(obj){
+  const response = await fetch("https://"+ config.ip +"/", {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(obj) // body data type must match "Content-Type" header
+  });
+  return response.json(); 
+}
+
+async getSite(id: any) {
+       
+  const response = await fetch("https://"+ config.ip +"/getSite/"+id, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+  
+  });
+  return response.json(); 
+  
+
+}
+  
+async getAllEvents() {
+       
+  const response = await fetch("https://"+ config.ip +"/getAllEvents", {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+   
+  });
+  return response.json(); 
+
 }
     
-    updateUser(id:string, form:Form){
-        
-        this.testCollection.doc(id).update(form);
-        
-    }
-    addUser(form:Form){
-        return this.testCollection.add(form);
-    }
    
-    removeUser(id){
-        return this.testCollection.doc(id).delete(); 
-    }
 }

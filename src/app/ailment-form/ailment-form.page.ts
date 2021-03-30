@@ -97,7 +97,7 @@ forms: Form[];
     this.ports = [];
     this.symptoms = [];
     this.ailmentService.getSymptoms()
-   .subscribe((response)=>{
+   .then((response)=>{
       
       this.ports = response;
       //console.log(this.ports[0].prettyName)
@@ -116,7 +116,7 @@ forms: Form[];
   
   firstBut(slides){
     slides.slideNext();
-    this.ailmentService.getSite(this.sitecode).subscribe(res =>{
+    this.ailmentService.getSite(this.sitecode).then(res =>{
       this.sitename = res.name
       this.siteAdd = res.address
     })
@@ -204,28 +204,12 @@ forms: Form[];
     let patient: Patient = {name: this.name, dob: this.formatDate(this.dob), nok: this.nok, address: this.address, chinumber: this.chinumber,  allergies: this.allergies, donor: true}
     let form: Form = {Symptoms: this.symptoms, Pain: this.knobValues, Priority: this.getPrior(), DateSubmitted: this.getDate(), Seen: this.seen, patient: "", Approved: false, DocID: "", ProgList: "", FinProg: "", SiteID: this.sitecode, Email: this.email}
     
-    const header = new HttpHeaders({
-      'Content-Type': 'application/json',
-       Accept: 'application/json',
-       'Access-Control-Allow-Origin': '*',
-     
-       //api token (if need)
-});    
-const options = {
-  headers: header
-}
-let obj = {
-  patient,
-  form}
-  ;
-let response = this.http.post("http://"+ config.ip +"/", obj, options);
-   response.toPromise().then(data => {
-     //console.log('response: ', data);
-     //TODO: handle HTTP errors
-   }).catch((err) =>{
-      //console.log('error', err);
-   });
-    //this.ailmentService.addUser(form);
-    this.completedForm();
+    
+let obj = {patient,form};
+this.ailmentService.submitForm(obj).then(res =>{
+  console.log(res)
+  this.completedForm();
+})
+    
   }
 }

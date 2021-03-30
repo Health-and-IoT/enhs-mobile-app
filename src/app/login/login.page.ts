@@ -38,7 +38,7 @@ siteid:number;
     //this.loginService.addUser(login1);
 let obj = {username: this.username, password: this.newPass, siteid: this.siteid} ;
   this.loginService.login(obj)
-    .subscribe((response)=>{
+    .then((response)=>{
       console.log('response: ', response);
       
       if(response.success == true){
@@ -50,7 +50,13 @@ let obj = {username: this.username, password: this.newPass, siteid: this.siteid}
 
     //this.loginService.getUser(this.username, this.password,this.siteid).subscribe(data =>{this.router.navigateByUrl('/dashboard');});
    
-    
+    //let response = await this.loginService.login(obj);
+    //   if(response.success == true){
+    //     this.storage.set('loggedIn', true);
+    //     this.storage.set('userID',response.id);
+    //      location.reload()
+    //     this.router.navigateByUrl('/dashboard')
+    //  };
 
    
   })

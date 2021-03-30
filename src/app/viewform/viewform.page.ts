@@ -26,11 +26,11 @@ export class ViewformPage implements OnInit {
   });
   console.log(this.progList)
     this.ailmentService.getVisits(this.form.patient)
-  .subscribe((response)=>{
+  .then((response)=>{
     
     this.visits = response
     this.ailmentService.getPatient(this.form.patient)
-  .subscribe((response)=>{
+  .then((response)=>{
     
     this.patient = response
     

@@ -2,11 +2,13 @@ import { getLocaleExtraDayPeriods } from '@angular/common';
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { fromFetch } from 'rxjs/fetch';
+import { map, switchMap, catchError } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
 import { config } from '../../assets/config';
 import { Storage } from '@ionic/storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 export interface User{
     username: string;
     password: string;
@@ -37,46 +39,65 @@ export class LoginService{
     getUsers(){
         return this.users;
     }
-    // getUser(username: string, password: string, siteid: number) {
-    //    return this.db.collection('users', ref => ref.where('username', '==', username).where('password', '==', password).where('siteid', '==', siteid)).snapshotChanges().
-    //     pipe(switchMap(docRef => {
-    //         this.storage.set('userID', docRef[0].payload.doc.id);
-    //         this.storage.set('loggedIn', true);
-    //         return this.db.collection('users').doc(docRef[0].payload.doc.id).valueChanges()
-    //     }))
+  
+//     async login(obj){
+        
+        
+//         const rawResponse = await fetch('https://'+ config.ip +'/login/', {
+//           method: 'POST',
+//           headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify(obj)
+//         });
+//         const content = await rawResponse.json();
+//       return content;
        
-    //     }
+    
+  
+    
+  
 
-    login(obj) : Observable<any> {
+// }
+    async login(obj)  {
+        const response = await fetch("https://"+ config.ip +"/login/", {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(obj) // body data type must match "Content-Type" header
+          });
+          return response.json(); 
        
-        const header = new HttpHeaders({
-            'Content-Type': 'application/json',
-             Accept: 'application/json',
-             'Access-Control-Allow-Origin': '*',
-           
-             //api token (if need)
-      });    
-      const options = {
-        headers: header
-      }
+     
       
-      return this.http.post("http://"+ config.ip +"/login/", obj, options).pipe(map((response: any) => response));
     }
 
-    getUser(id) : Observable<any> {
+    async getUser(id)  {
        
-        const header = new HttpHeaders({
-            'Content-Type': 'application/json',
-             Accept: 'application/json',
-             'Access-Control-Allow-Origin': '*',
-           
-             //api token (if need)
-      });    
-      const options = {
-        headers: header
-      }
+        const response = await fetch("https://"+ config.ip +"/getUser/"+id, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          
+          });
+          return response.json(); 
       
-      return this.http.post("http://"+ config.ip +"/getUser/"+id, options).pipe(map((response: any) => response));
+     
     }
     
     updateUser(user:User, id:string){

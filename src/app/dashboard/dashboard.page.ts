@@ -30,12 +30,12 @@ export class DashboardPage implements OnInit {
     storage.get('loggedIn').then((val) => { this.loggedIn = val}),
    
     storage.get('userID').then((val) => {  this.loginService.getUser(val)
-      .subscribe((response)=>{
+      .then((response)=>{
         
          this.rank = response.rank
        
          this.ailmentService.getForms(response.siteid)
-    .subscribe((response)=>{
+    .then((response)=>{
         this.rows = response;
         //console.log(this.rows); //<-- not undefined anymore
     });
@@ -58,6 +58,10 @@ export class DashboardPage implements OnInit {
       });})
       
    
+  }
+
+  onSelect(row){
+    
   }
   otherFunc(row) {
     if (row.Seen == true){
@@ -84,7 +88,7 @@ export class DashboardPage implements OnInit {
     this.isEditable[rowIndex]=!this.isEditable[rowIndex]
     //console.log("Row saved: "+ rowIndex);
     this.ailmentService.updateVisit(row.docId, row)
-    .subscribe((response)=>{
+    .then((response)=>{
        
          //<-- not undefined anymore
     });
@@ -95,7 +99,7 @@ export class DashboardPage implements OnInit {
     this.isEditable[rowIndex]=!this.isEditable[rowIndex]
     //console.log(row.docID);
     this.ailmentService.deleteForm(row.docID)
-    .subscribe((response)=>{
+    .then((response)=>{
        
          //<-- not undefined anymore
     });
@@ -120,7 +124,7 @@ export class DashboardPage implements OnInit {
     row.seen = true
     
     this.ailmentService.updateVisit(row.docId, row)
-    .subscribe((response)=>{
+    .then((response)=>{
        
         //console.log(response); //<-- not undefined anymore
     });
@@ -132,7 +136,7 @@ export class DashboardPage implements OnInit {
     
     //console.log(row)
     this.ailmentService.updateVisit(row.docId, row)
-    .subscribe((response)=>{
+    .then((response)=>{
        
         //console.log(response); //<-- not undefined anymore
     });
