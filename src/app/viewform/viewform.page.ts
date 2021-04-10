@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Form, AilmentService } from '../services/af.service';
 import { Patient } from '../services/patient.service';
-
+import { AlertController, Platform } from '@ionic/angular';
 @Component({
   selector: 'app-viewform',
   templateUrl: './viewform.page.html',
@@ -15,7 +15,7 @@ export class ViewformPage implements OnInit {
   progList : any;
   
   
-  constructor(private http: HttpClient, private ailmentService: AilmentService) { }
+  constructor(private http: HttpClient, private ailmentService: AilmentService, public alertController: AlertController) { }
 
   async ngOnInit() {
     this.patient = {name: "", nok: "", dob: "", address: "", allergies: "", chinumber: "", donor: false}
@@ -43,15 +43,35 @@ export class ViewformPage implements OnInit {
 
 }
 
-finProg(test){
+async finProg(test){
   
   this.form.finProg = test
   console.log(this.form)
   this.ailmentService.updateVisit(this.form.docID, this.form)
     .then((response)=>{
        console.log(response)
-         //<-- not undefined anymore
+       
     });
+    const alert = await this.alertController.create({
+      header: 'Final Prognosis Confirmation',
+      message: 'You are about to select the final prognosis as - ' + this.form.finProg + ". Are you sure?",
+      buttons: [
+        {
+          text: 'Confirm',
+          handler: () => {
+            location.reload();
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            location.reload();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
 }
 
 

@@ -18,6 +18,32 @@
     <ion-slides pager="true" [options]="{allowTouchMove:false}" style="height:100vh;" #slides slidesPerView="1">
         <ion-slide>
             <div style="display:block">
+                <ion-card color="danger">
+
+                    <ion-card-header>
+
+                        <ion-card-title>DISCLAIMER - Please do not use real data as this is a prototype of the ENHS system.</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        For the purpose of testing please enter fake data and symptoms.
+
+                    </ion-card-content>
+                    <ion-card-content>
+
+                        <ion-button (click)="initBut(slides)">Accept</ion-button>
+                        <ion-button color="warning">Decline</ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+
+
+
+
+
+        </ion-slide>
+        <ion-slide>
+            <div style="display:block">
                 <ion-button color="success" (click)="scanQrCode()">Scan QR Code</ion-button>
                 <ion-item>
                     <ion-label position="floating">Scan or enter site code</ion-label>

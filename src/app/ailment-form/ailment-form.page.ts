@@ -8,7 +8,7 @@ import { Patient, PatientService } from '../services/patient.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { config } from '../../assets/config';
-
+import { Storage } from '@ionic/storage';
 class Port {
   public id: number;
   public name: string;
@@ -44,7 +44,7 @@ sitename: string;
 siteAdd: string; 
 sitecode: string;
 email: string;
-
+private maxSub: boolean;
 
 forms: Form[];
  slideOpts = {
@@ -53,7 +53,7 @@ forms: Form[];
     allowTouchMove: true
   };
   
-  constructor(private ailmentService: AilmentService, public alertController: AlertController, private router: Router, private patientService: PatientService, private http: HttpClient, public platform: Platform) { 
+  constructor(private storage: Storage, private ailmentService: AilmentService, public alertController: AlertController, private router: Router, private patientService: PatientService, private http: HttpClient, public platform: Platform) { 
     if (this.platform.is('ios')) {
       this.slideOpts.allowTouchMove = true;
      }
@@ -113,13 +113,45 @@ forms: Form[];
   scanQrCode(){
     this.sitecode = "111"
   }
+  async initBut(slides){
+    
+    this.storage.get('formSubMax').then(async (val) => { 
+      if(val == true){
+        const alert = await this.alertController.create({
+          header: 'Max Form Submission!',
+          message: 'To prevent system overload and potential crashing, testing and prototyping has been limited to 1 form per device.',
+          buttons: [
+            {
+              text: 'Ok',
+              handler: () => {
+                this.router.navigateByUrl('/dashboard');
+                location.reload()
+              }
+            }
+          ]
+        });
+    
+        await alert.present();
+      
+      }else{
+        slides.slideNext();
+       
+      }
+
+    })
+  
+    
+  }
   
   firstBut(slides){
-    slides.slideNext();
-    this.ailmentService.getSite(this.sitecode).then(res =>{
-      this.sitename = res.name
-      this.siteAdd = res.address
-    })
+   
+      slides.slideNext();
+      this.ailmentService.getSite(this.sitecode).then(res =>{
+        this.sitename = res.name
+        this.siteAdd = res.address
+      })
+    
+   
   }
   backSlide(slides) {
     slides.slidePrev();
@@ -137,6 +169,7 @@ forms: Form[];
           text: 'Ok',
           handler: () => {
             this.router.navigateByUrl('/dashboard');
+            location.reload()
           }
         }
       ]
@@ -209,6 +242,7 @@ let obj = {patient,form};
 this.ailmentService.submitForm(obj).then(res =>{
   console.log(res)
   this.completedForm();
+  this.storage.set('formSubMax', true);
 })
     
   }

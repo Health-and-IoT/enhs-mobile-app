@@ -80,6 +80,7 @@
         </ion-slides>
     </div>
     <div *ngIf="!checkDevWidth()">
+
         <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
             <ion-slide style="width:50%; height: 500px; ">
 
@@ -146,7 +147,19 @@
     </div>
 
 
+    <ion-card color="danger">
 
+        <ion-card-header>
+
+            <ion-card-title>DISCLAIMER - Please do not use real data as this is a prototype of the ENHS system.</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            For the purpose of testing all data below is fake and generated to simulate the system in real time.
+
+        </ion-card-content>
+
+    </ion-card>
     <div *ngIf="checkDevWidth()">
         <div *ngIf="checkStatus()">
             <ion-toolbar>
