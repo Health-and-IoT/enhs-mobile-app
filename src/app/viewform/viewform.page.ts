@@ -29,6 +29,7 @@ export class ViewformPage implements OnInit {
   .then((response)=>{
     
     this.visits = response
+    console.log(response)
     this.ailmentService.getPatient(this.form.patient)
   .then((response)=>{
     
@@ -42,6 +43,16 @@ export class ViewformPage implements OnInit {
 
 }
 
+finProg(test){
+  
+  this.form.finProg = test
+  console.log(this.form)
+  this.ailmentService.updateVisit(this.form.docID, this.form)
+    .then((response)=>{
+       console.log(response)
+         //<-- not undefined anymore
+    });
+}
 
 
 }

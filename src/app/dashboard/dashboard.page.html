@@ -223,7 +223,13 @@
 
                     </ng-template>
                 </ngx-datatable-column>
+                <ngx-datatable-column [flexGrow]="1.5" name="FinalPrognosis" prop="finProg">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 
+                        <ion-input value="finProg" [(ngModel)]="row.finProg" [disabled]="!isEditable[rowIndex]"></ion-input>
+
+                    </ng-template>
+                </ngx-datatable-column>
                 <ngx-datatable-column name="Actions" sortable="false" prop="Id">
                     <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                         <div style="display: inline-block">

@@ -46,7 +46,7 @@
                 </ion-item>
 
                 <ion-item *ngFor="let i of visits">
-                    <ion-label>Illness: {{i.ailment}}</ion-label>
+                    <ion-label>Illness: {{i.finProg}}</ion-label>
                     <ion-label>DateSubmitted: {{i.dateSubmitted}}</ion-label>
                 </ion-item>
             </ion-card>
@@ -61,18 +61,18 @@
                     </ion-label>
 
 
-                    <ion-chip *ngIf="i.sympCount < 3 && i.sympCount > 1" color="warning">
+                    <ion-chip *ngIf="i.sympCount < 3 && i.sympCount > 1" color="warning" (click)="finProg(i.name)">
                         <ion-icon name="alert" color="warning"></ion-icon>
                         <ion-label>{{i.sympCount}}</ion-label>
 
                     </ion-chip>
-                    <ion-chip *ngIf="i.sympCount >= 3" color="danger">
+                    <ion-chip *ngIf="i.sympCount >= 3" color="danger" (click)="finProg(i.name)">
                         <ion-icon name="warning" color="danger"></ion-icon>
                         <ion-label>{{i.sympCount}}</ion-label>
 
                     </ion-chip>
 
-                    <ion-chip *ngIf="i.sympCount < 2 && i.sympCount > 0">
+                    <ion-chip *ngIf="i.sympCount < 2 && i.sympCount > 0" (click)="finProg(i.name)">
                         <ion-label>{{i.sympCount}}</ion-label>
                     </ion-chip>
                 </ion-item>

@@ -50,6 +50,7 @@ export class DashboardPage implements OnInit {
        
       
         {name: "Pain"},
+        {name: "FinProg"}
       
         
   

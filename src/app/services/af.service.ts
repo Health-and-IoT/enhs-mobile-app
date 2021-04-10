@@ -136,7 +136,7 @@ async getSymptoms() {
 
 }
 async updateVisit(id: any, row : any) {
-       
+       console.log(row.finProg)
   const response = await fetch("https://"+ config.ip +"/updateForm/" + id, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
