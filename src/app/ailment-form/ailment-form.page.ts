@@ -26,6 +26,8 @@ export class AilmentFormPage implements OnInit {
 ports: Port[];
 port: Port;
 s: Port[];
+sConvert: boolean;
+pSymptoms: string[];
 symptoms: string[];
 name: string;
 dob: any;
@@ -94,8 +96,10 @@ forms: Form[];
     this.ailmentService.getUsers().subscribe(res =>{
       this.forms = res;
     })
+    this.sConvert = false;
     this.ports = [];
     this.symptoms = [];
+    this.pSymptoms = [];
     this.ailmentService.getSymptoms()
    .then((response)=>{
       
@@ -114,7 +118,7 @@ forms: Form[];
     this.sitecode = "111"
   }
   async initBut(slides){
-    
+    this.storage.set('formSubMax', false); //- bypass max form check.
     this.storage.get('formSubMax').then(async (val) => { 
       if(val == true){
         const alert = await this.alertController.create({
@@ -151,6 +155,7 @@ forms: Form[];
         this.siteAdd = res.address
       })
     
+      console.log(this.sitename)
    
   }
   backSlide(slides) {
@@ -221,20 +226,43 @@ forms: Form[];
     return this.dateSubmitted;
   }
   
+  convertToSymp(){
+    var i;
+    for (i = 0; i < this.s.length; i++) {
+      if(this.s[i].name == undefined){
+        break;
+      }else{
+      this.symptoms.push(this.s[i].name)
+      this.pSymptoms.push(this.s[i].prettyName)
+      }
+   
+   } 
+   console.log(this.symptoms)
+  }
+  finalBut(slides){
+
+    
+    this.dob = this.formatDate(this.dob);
+      this.ailmentService.getSite(this.sitecode).then(res =>{
+        if(this.sConvert == false){
+          this.convertToSymp();
+          this.sConvert = true;
+        }
+       
+        this.sitename = res.name
+        this.siteAdd = res.address
+        slides.slideNext();
+       console.log(this.sitename)
+      })
+      
+  }
+  
   gatherInfo() {
     
     //console.log(this.symptoms)
-    var i;
-     for (i = 0; i < this.s.length; i++) {
-       if(this.s[i].name == undefined){
-         break;
-       }else{
-       this.symptoms.push(this.s[i].name)
-       }
     
-    } 
    
-    let patient: Patient = {name: this.name, dob: this.formatDate(this.dob), nok: this.nok, address: this.address, chinumber: this.chinumber,  allergies: this.allergies, donor: true}
+    let patient: Patient = {name: this.name, dob: this.dob, nok: this.nok, address: this.address, chinumber: this.chinumber,  allergies: this.allergies, donor: true}
     let form: Form = {Symptoms: this.symptoms, Pain: this.knobValues, Priority: this.getPrior(), DateSubmitted: this.getDate(), Seen: this.seen, patient: "", Approved: false, DocID: "", ProgList: "", FinProg: "", SiteID: this.sitecode, Email: this.email}
     
     

@@ -15,7 +15,7 @@
     </ion-header>
 
 
-    <ion-slides pager="true" [options]="{allowTouchMove:false}" style="height:100vh;" #slides slidesPerView="1">
+    <ion-slides pager="true" [options]="{allowTouchMove:false}" #slides slidesPerView="1">
         <ion-slide>
             <div style="display:block">
                 <ion-card color="danger">
@@ -42,36 +42,11 @@
 
 
         </ion-slide>
-        <ion-slide>
-            <div style="display:block">
-                <ion-button color="success" (click)="scanQrCode()">Scan QR Code</ion-button>
-                <ion-item>
-                    <ion-label position="floating">Scan or enter site code</ion-label>
 
-                    <ion-input [(ngModel)]="sitecode"></ion-input>
-
-
-
-
-                </ion-item>
-
-
-
-
-                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-                <ion-button color="primary" (click)="firstBut(slides)" [disabled]="!sitecode">Next</ion-button>
-            </div>
-
-
-
-
-
-        </ion-slide>
         <ion-slide>
 
             <div style="display:block">
-                <ion-label position="floating">{{sitename}} - </ion-label>
-                <ion-label position="floating">{{siteAdd}}</ion-label>
+
                 <ion-item>
                     <ion-label position="floating">Name</ion-label>
                     <ion-input [(ngModel)]="name" required></ion-input>
@@ -88,6 +63,7 @@
                     <ion-label position="floating">Email</ion-label>
                     <ion-input [(ngModel)]="email" required></ion-input>
                 </ion-item>
+
                 <ion-button color="primary" (click)="nextSlide(slides)" [disabled]="!name || !dob || !nok  || !email">Next</ion-button>
 
             </div>
@@ -117,11 +93,7 @@
                         <ionic-selectable [(ngModel)]="s" [items]="ports" itemValueField="id" [isMultiple]="true" itemTextField="prettyName" [canSearch]="true" (onChange)="portChange($event)">
                         </ionic-selectable>
                     </ion-item>
-                    <!-- <ion-searchbar style="padding-top:30px; " howCancelButton="focus " [(ngModel)]="illness " type="text " debounce="500 " (ionChange)="getItems($event) "></ion-searchbar>
 
-                <ion-list *ngIf="isItemAvailable ">
-                    <ion-item *ngFor="let item of items " (click)="test(item) ">{{ item }}</ion-item>
-                </ion-list> -->
 
                 </ion-item>
                 <ion-item>
@@ -144,10 +116,113 @@
                 <ion-label>{{knobValues}}</ion-label>
                 <div>
                     <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-                    <ion-button color="success" (click)="gatherInfo()" style="" [disabled]="!knobValues">Submit</ion-button>
+                    <ion-button color="primary" (click)="nextSlide(slides)" style="" [disabled]="!knobValues">Next</ion-button>
                 </div>
 
             </div>
+        </ion-slide>
+        <ion-slide>
+            <div style="display:block">
+                <ion-button color="success" (click)="scanQrCode()">Scan QR Code</ion-button>
+                <ion-item>
+                    <ion-label position="floating">Scan or enter site code</ion-label>
+
+                    <ion-input [(ngModel)]="sitecode" [disabled]="true"></ion-input>
+
+
+
+
+                </ion-item>
+
+
+
+
+                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
+                <ion-button color="primary" (click)="finalBut(slides)" [disabled]="!sitecode">Next</ion-button>
+            </div>
+
+
+
+
+
+        </ion-slide>
+
+        <ion-slide>
+
+            <div style="overflow-y: scroll;
+  overflow-x: hidden;">
+                <ion-label position="floating">Review Your Info & Form</ion-label>
+                <ion-card>
+                    <ion-item color="primary">
+                        <ion-label>Hospital Info</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>{{sitename}}</ion-label>
+
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>{{siteAdd}}</ion-label>
+                    </ion-item>
+                </ion-card>
+                <ion-card>
+                    <ion-item color="primary">
+                        <ion-label>Your Info</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Full Name: {{name}}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Address: {{address}}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Email: {{email}}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Next of Kin: {{nok}}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Date of Birth: {{dob}}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>CHI Number: {{chinumber}}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Allergies: {{allergies}}</ion-label>
+                    </ion-item>
+                </ion-card>
+                <ion-card>
+                    <ion-item color="primary">
+                        <ion-label>Your Symptoms</ion-label>
+                    </ion-item>
+                    <div style="height:100px;width:100%;overflow:auto;">
+                        <ion-list>
+                            <ion-item *ngFor="let i of pSymptoms">
+                                <ion-label>{{i}}
+
+                                </ion-label>
+                            </ion-item>
+                        </ion-list>
+                    </div>
+
+                    <ion-item color="primary">
+                        <ion-label>Your Pain Rating</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Pain: {{knobValues}}</ion-label>
+                    </ion-item>
+                </ion-card>
+
+
+
+
+                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
+                <ion-button color="success" (click)="gatherInfo()" style="">Submit</ion-button>
+            </div>
+
+
+
+
+
         </ion-slide>
 
     </ion-slides>
