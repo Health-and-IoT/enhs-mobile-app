@@ -79,6 +79,7 @@ rank: String;
     
   ) {
     this.initializeApp();
+   
     //storage.set('loggedIn', false);
    
     
@@ -126,6 +127,7 @@ rank: String;
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      
     });
   }
 
@@ -166,6 +168,7 @@ rank: String;
 
       }else{
         this.loggedIn = false;
+        this.storage.set('userID', "r61vnVKiqFXngU951c5f");
       }
     });
   }

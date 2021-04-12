@@ -118,7 +118,7 @@ forms: Form[];
     this.sitecode = "111"
   }
   async initBut(slides){
-    this.storage.set('formSubMax', false); //- bypass max form check.
+    //this.storage.set('formSubMax', false); //- bypass max form check.
     this.storage.get('formSubMax').then(async (val) => { 
       if(val == true){
         const alert = await this.alertController.create({
