@@ -1,8 +1,8 @@
 {
-  "name": "enhs",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular",
-  "id": "12c0e939"
+    "name": "enhs",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "angular",
+    "id": "12c0e939"
 }
