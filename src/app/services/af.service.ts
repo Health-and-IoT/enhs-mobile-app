@@ -59,7 +59,7 @@ export class AilmentService{
 
    async getForms(id) {
        
-      const response = await fetch("https://"+ config.ip +"/getPatients/"+id, {
+      const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/getPatients/"+id, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -79,7 +79,7 @@ export class AilmentService{
 
 async getPatient(row : any)  {
      
-  const response = await fetch("https://"+ config.ip +"/getPatient/"+row, {
+  const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/getPatient/"+row, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -99,7 +99,7 @@ async getPatient(row : any)  {
 
 async getVisits(row : any){
        
-  const response = await fetch("https://"+ config.ip +"/getVisits/"+row, {
+  const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/getVisits/"+row, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -119,7 +119,7 @@ async getVisits(row : any){
 
 async getSymptoms() {
        
-  const response = await fetch("https://"+ config.ip +"/symptoms", {
+  const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/symptoms", {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -138,7 +138,7 @@ async getSymptoms() {
 }
 async updateVisit(id: any, row : any) {
        console.log(row.finProg)
-  const response = await fetch("https://"+ config.ip +"/updateForm/" + id, {
+  const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/updateForm/" + id, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -158,7 +158,7 @@ async updateVisit(id: any, row : any) {
 
 async deleteForm(id: any) {
        
-  const response = await fetch("https://"+ config.ip +"/deleteForm/"+id, {
+  const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/deleteForm/"+id, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -177,7 +177,7 @@ async deleteForm(id: any) {
 }
 
 async submitForm(obj){
-  const response = await fetch("https://"+ config.ip +"/", {
+  const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/", {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -195,7 +195,7 @@ async submitForm(obj){
 
 async getSite(id: any) {
        
-  const response = await fetch("https://"+ config.ip +"/getSite/"+id, {
+  const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/getSite/"+id, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -215,7 +215,7 @@ async getSite(id: any) {
   
 async getAllEvents() {
        
-  const response = await fetch("https://"+ config.ip +"/getAllEvents", {
+  const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/getAllEvents", {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

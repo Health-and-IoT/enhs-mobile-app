@@ -148,81 +148,81 @@
         </ion-slide>
 
         <ion-slide>
+            <div style="height:500px;width:100%;overflow:auto;">
+                <div style="overflow-y: scroll;
+  display: block;">
+                    <ion-label position="floating">Review Your Info & Form</ion-label>
+                    <ion-card>
+                        <ion-item color="primary">
+                            <ion-label>Hospital Info</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>{{sitename}}</ion-label>
 
-            <div style="overflow-y: scroll;
-  overflow-x: hidden;">
-                <ion-label position="floating">Review Your Info & Form</ion-label>
-                <ion-card>
-                    <ion-item color="primary">
-                        <ion-label>Hospital Info</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>{{sitename}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>{{siteAdd}}</ion-label>
+                        </ion-item>
+                    </ion-card>
+                    <ion-card>
+                        <ion-item color="primary">
+                            <ion-label>Your Info</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Full Name: {{name}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Address: {{address}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Email: {{email}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Next of Kin: {{nok}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Date of Birth: {{dob}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>CHI Number: {{chinumber}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Allergies: {{allergies}}</ion-label>
+                        </ion-item>
+                    </ion-card>
+                    <ion-card>
+                        <ion-item color="primary">
+                            <ion-label>Your Symptoms</ion-label>
+                        </ion-item>
+                        <div style="height:100px;width:100%;overflow:auto;">
+                            <ion-list>
+                                <ion-item *ngFor="let i of pSymptoms">
+                                    <ion-label>{{i}}
 
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>{{siteAdd}}</ion-label>
-                    </ion-item>
-                </ion-card>
-                <ion-card>
-                    <ion-item color="primary">
-                        <ion-label>Your Info</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>Full Name: {{name}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>Address: {{address}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>Email: {{email}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>Next of Kin: {{nok}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>Date of Birth: {{dob}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>CHI Number: {{chinumber}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>Allergies: {{allergies}}</ion-label>
-                    </ion-item>
-                </ion-card>
-                <ion-card>
-                    <ion-item color="primary">
-                        <ion-label>Your Symptoms</ion-label>
-                    </ion-item>
-                    <div style="height:100px;width:100%;overflow:auto;">
-                        <ion-list>
-                            <ion-item *ngFor="let i of pSymptoms">
-                                <ion-label>{{i}}
+                                    </ion-label>
+                                </ion-item>
+                            </ion-list>
+                        </div>
 
-                                </ion-label>
-                            </ion-item>
-                        </ion-list>
-                    </div>
-
-                    <ion-item color="primary">
-                        <ion-label>Your Pain Rating</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>Pain: {{knobValues}}</ion-label>
-                    </ion-item>
-                </ion-card>
-
-
+                        <ion-item color="primary">
+                            <ion-label>Your Pain Rating</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Pain: {{knobValues}}</ion-label>
+                        </ion-item>
+                    </ion-card>
 
 
-                <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
-                <ion-button color="success" (click)="gatherInfo()" style="">Submit</ion-button>
+
+
+                    <ion-button color="secondary" (click)="backSlide(slides)">Previous</ion-button>
+                    <ion-button color="success" (click)="gatherInfo()" style="">Submit</ion-button>
+                </div>
+
+
+
+
             </div>
-
-
-
-
-
         </ion-slide>
 
     </ion-slides>

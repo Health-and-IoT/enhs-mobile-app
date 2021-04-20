@@ -55,25 +55,43 @@ export class LoginService{
 //       return content;
        
     
-  
+async test(){
+    const response = await fetch("https://enhs-cors.herokuapp.com/https://146.176.251.23/test", {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          'x-request-with' : 'x-requested-by'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        
+      });
+      console.log(response)
+}
     
   
 
 // }
     async login(obj)  {
-        const response = await fetch("https://"+ config.ip +"/login/", {
+        const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/login/", {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'x-request-with' : 'x-requested-by'
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             redirect: 'follow', // manual, *follow, error
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(obj) // body data type must match "Content-Type" header
           });
+         
           return response.json(); 
        
      
@@ -82,7 +100,7 @@ export class LoginService{
 
     async getUser(id)  {
        
-        const response = await fetch("https://"+ config.ip +"/getUser/"+id, {
+        const response = await fetch("https://enhs-cors.herokuapp.com/https://"+ config.ip +"/getUser/"+id, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
