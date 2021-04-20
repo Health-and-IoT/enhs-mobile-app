@@ -26,6 +26,7 @@ siteid:number;
     this.loginService.getUsers().subscribe(res =>{
       this.users = res;
     })
+    
   }
   
   login(){

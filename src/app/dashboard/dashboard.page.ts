@@ -145,11 +145,7 @@ export class DashboardPage implements OnInit {
   }
   
   async ngOnInit()  {
-    this.ailmentService.test()
-    .then((response)=>{
-       
-        console.log(response); //<-- not undefined anymore
-    });
+   
    
   }
 
