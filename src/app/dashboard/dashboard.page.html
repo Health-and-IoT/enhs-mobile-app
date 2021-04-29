@@ -170,7 +170,7 @@
                 </ion-title>
             </ion-toolbar>
 
-            <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'name', dir: 'desc'}]" [columns]="columns">
+            <ngx-datatable #table *ngIf="checkDoctor()" [rows]="rows" [limit]="5" class="material" [columnMode]="'force'" reo [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sorts]="[{prop: 'dateSubmitted', dir: 'desc'}]" [columns]="columns">
                 <ngx-datatable-column [flexGrow]="0.5" [width]="50">
                     <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                         <!-- Pencil icon -->
